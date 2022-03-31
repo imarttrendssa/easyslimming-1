@@ -1,0 +1,2 @@
+# easyslimming
+easy slim project
