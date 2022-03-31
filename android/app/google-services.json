@@ -1,0 +1,142 @@
+{
+  "project_info": {
+    "project_number": "1061134492738",
+    "project_id": "easyyslimming",
+    "storage_bucket": "easyyslimming.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061134492738:android:1448e8b5282b7906f5f9db",
+        "android_client_info": {
+          "package_name": "com.flutterflow.easyslimming"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061134492738-nnul7vtv52u5k97o336oj0ajjkse79v6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.easyslimming",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1061134492738-j9c0sv2i0dveeulr986vi70t4djiv67h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIv4wLSqS8GP4cJZZmvm_T9JiD8thK4eU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061134492738-j9c0sv2i0dveeulr986vi70t4djiv67h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1061134492738-1sa0nd8po9ls6b31s2d53mq8uf1d2qba.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.easyslimming"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061134492738:android:a1caa5ceba54c19df5f9db",
+        "android_client_info": {
+          "package_name": "com.flutterflow.loginform"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061134492738-9tg9ted47sa9vghmqb2qb1log4dfadbf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.flutterflow.loginform",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1061134492738-j9c0sv2i0dveeulr986vi70t4djiv67h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIv4wLSqS8GP4cJZZmvm_T9JiD8thK4eU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061134492738-j9c0sv2i0dveeulr986vi70t4djiv67h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1061134492738-1sa0nd8po9ls6b31s2d53mq8uf1d2qba.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.easyslimming"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1061134492738:android:f549036ae3857d1bf5f9db",
+        "android_client_info": {
+          "package_name": "com.slimming.slimapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1061134492738-faqar0m0pe5kuccdats7gknnn4srhnng.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.slimming.slimapp",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "1061134492738-j9c0sv2i0dveeulr986vi70t4djiv67h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIv4wLSqS8GP4cJZZmvm_T9JiD8thK4eU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1061134492738-j9c0sv2i0dveeulr986vi70t4djiv67h.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1061134492738-1sa0nd8po9ls6b31s2d53mq8uf1d2qba.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.flutterflow.easyslimming"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
