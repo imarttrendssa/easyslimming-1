@@ -18,12 +18,17 @@ abstract class ProductsRecord
   String get price;
 
   @nullable
+  @BuiltValueField(wireName: 'product_name')
+  String get productName;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(ProductsRecordBuilder builder) => builder
     ..image = ''
-    ..price = '';
+    ..price = ''
+    ..productName = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('products');
@@ -49,9 +54,11 @@ abstract class ProductsRecord
 Map<String, dynamic> createProductsRecordData({
   String image,
   String price,
+  String productName,
 }) =>
     serializers.toFirestore(
         ProductsRecord.serializer,
         ProductsRecord((p) => p
           ..image = image
-          ..price = price));
+          ..price = price
+          ..productName = productName));

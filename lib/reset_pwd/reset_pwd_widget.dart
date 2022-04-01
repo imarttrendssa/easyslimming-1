@@ -2,6 +2,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login/login_widget.dart';
+import '../main.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -37,31 +38,45 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFE5E5E5),
         automaticallyImplyLeading: false,
         title: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 200, 0),
+              child: Image.asset(
+                'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
+                width: 60,
+                height: 60,
+                fit: BoxFit.cover,
+              ),
             ),
-            Text(
-              'Skip',
-              style: FlutterFlowTheme.of(context).title3.override(
-                    fontFamily: 'inter sans serif',
-                    fontSize: 25,
-                    useGoogleFonts: false,
+            InkWell(
+              onTap: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => NavBarPage(initialPage: 'HomePage'),
                   ),
+                );
+              },
+              child: Text(
+                'Skip',
+                style: FlutterFlowTheme.of(context).title3.override(
+                      fontFamily: 'inter sans serif',
+                      color: Colors.black,
+                      fontSize: 25,
+                      useGoogleFonts: false,
+                    ),
+              ),
             ),
           ],
         ),
         actions: [],
-        centerTitle: true,
-        elevation: 4,
+        centerTitle: false,
+        elevation: 0,
       ),
       backgroundColor: Color(0xFFE5E5E5),
       body: SafeArea(
@@ -79,6 +94,7 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
                     'Reset Password',
                     style: FlutterFlowTheme.of(context).title1.override(
                           fontFamily: 'inter sans serif',
+                          color: Colors.black,
                           useGoogleFonts: false,
                         ),
                   ),
@@ -129,6 +145,7 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'inter sans serif',
+                              color: Colors.black,
                               useGoogleFonts: false,
                             ),
                       ),
@@ -173,6 +190,7 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'inter sans serif',
+                              color: Colors.black,
                               useGoogleFonts: false,
                             ),
                       ),
@@ -217,6 +235,7 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
                         ),
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'inter sans serif',
+                              color: Colors.black,
                               useGoogleFonts: false,
                             ),
                       ),
@@ -277,6 +296,7 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
                         'Sign In',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'inter sans serif',
+                              color: Colors.black,
                               decoration: TextDecoration.underline,
                               useGoogleFonts: false,
                             ),

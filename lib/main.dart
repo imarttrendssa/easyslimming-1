@@ -10,8 +10,10 @@ import 'flutter_flow/internationalization.dart';
 import 'package:easy_slimming/login/login_widget.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'products/products_widget.dart';
 import 'home_page/home_page_widget.dart';
+import 'products/products_widget.dart';
+import 'wishlist/wishlist_widget.dart';
+import 'profile/profile_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -96,7 +98,7 @@ class NavBarPage extends StatefulWidget {
 
 /// This is the private State class that goes with NavBarPage.
 class _NavBarPageState extends State<NavBarPage> {
-  String _currentPage = 'home_Page';
+  String _currentPage = 'HomePage';
 
   @override
   void initState() {
@@ -107,8 +109,10 @@ class _NavBarPageState extends State<NavBarPage> {
   @override
   Widget build(BuildContext context) {
     final tabs = {
+      'HomePage': HomePageWidget(),
       'products': ProductsWidget(),
-      'home_Page': HomePageWidget(),
+      'wishlist': WishlistWidget(),
+      'profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -124,8 +128,16 @@ class _NavBarPageState extends State<NavBarPage> {
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home_outlined,
+              size: 24,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
             icon: FaIcon(
-              FontAwesomeIcons.shoppingCart,
+              FontAwesomeIcons.shoppingBasket,
               size: 24,
             ),
             label: 'shop',
@@ -133,10 +145,22 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.home_outlined,
+              Icons.favorite_border_rounded,
               size: 24,
             ),
-            label: 'Home',
+            label: '',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.person_outlined,
+              size: 24,
+            ),
+            activeIcon: Icon(
+              Icons.person,
+              size: 24,
+            ),
+            label: 'Profile',
             tooltip: '',
           )
         ],
