@@ -42,20 +42,12 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                 fit: BoxFit.cover,
               ),
             ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-              child: Icon(
-                Icons.search_outlined,
-                color: Color(0xFFED1B6F),
-                size: 24,
-              ),
-            ),
             InkWell(
               onTap: () async {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NavBarPage(initialPage: 'products'),
+                    builder: (context) => NavBarPage(initialPage: 'cart'),
                   ),
                 );
               },
@@ -72,18 +64,6 @@ class _WishlistWidgetState extends State<WishlistWidget> {
         elevation: 0,
       ),
       backgroundColor: Color(0xFFF1F4F8),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          print('FloatingActionButton pressed ...');
-        },
-        backgroundColor: Color(0xFFED1B6F),
-        elevation: 8,
-        child: Icon(
-          Icons.add_shopping_cart,
-          color: Colors.white,
-          size: 28,
-        ),
-      ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -265,7 +245,13 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Icon(
-                                        Icons.favorite_sharp,
+                                        Icons.add_shopping_cart,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryColor,
+                                        size: 24,
+                                      ),
+                                      Icon(
+                                        Icons.delete_outlined,
                                         color: FlutterFlowTheme.of(context)
                                             .primaryColor,
                                         size: 24,

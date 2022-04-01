@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../product_details/product_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -37,14 +38,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-              child: Icon(
-                Icons.search_outlined,
-                color: Color(0xFFED1B6F),
-                size: 24,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
               child: InkWell(
                 onTap: () async {
                   await Navigator.push(
@@ -68,7 +61,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => NavBarPage(initialPage: 'products'),
+                      builder: (context) => NavBarPage(initialPage: 'cart'),
                     ),
                   );
                 },
@@ -176,10 +169,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 40),
+                  padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 5),
                   child: StreamBuilder<List<ProductsRecord>>(
                     stream: queryProductsRecord(
-                      limit: 2,
+                      limit: 8,
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -200,8 +193,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         padding: EdgeInsets.zero,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 0,
+                          mainAxisSpacing: 0,
                           childAspectRatio: 1,
                         ),
                         scrollDirection: Axis.vertical,
@@ -217,23 +210,34 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 5, 0, 0),
-                                    child: Image.network(
-                                      'https://picsum.photos/seed/639/600',
-                                      width: 100,
-                                      height: 100,
-                                      fit: BoxFit.cover,
+                                        0, 2, 0, 0),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProductDetailsWidget(),
+                                          ),
+                                        );
+                                      },
+                                      child: Image.asset(
+                                        'assets/images/combo.png',
+                                        height: 130,
+                                        fit: BoxFit.contain,
+                                      ),
                                     ),
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        10, 0, 0, 0),
+                                        6, 0, 0, 0),
                                     child: Text(
-                                      'item',
+                                      'Rapit slim Combo',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
@@ -244,35 +248,37 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10, 0, 0, 0),
-                                    child: Text(
-                                      'desc',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'inter sans serif',
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.normal,
-                                            useGoogleFonts: false,
-                                          ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        10, 0, 0, 0),
-                                    child: Text(
-                                      'R100.00',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'inter sans serif',
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.normal,
-                                            useGoogleFonts: false,
-                                          ),
-                                    ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 30, 0),
+                                        child: Text(
+                                          'R 599.00',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'inter sans serif',
+                                                color: Color(0xFFED1B6F),
+                                                fontSize: 15,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.favorite,
+                                        color: Color(0xFFED1B6F),
+                                        size: 24,
+                                      ),
+                                      Icon(
+                                        Icons.add_shopping_cart,
+                                        color: Color(0xFFED1B6F),
+                                        size: 24,
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -284,58 +290,64 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   ),
                 ),
               ),
-              Container(
-                width: double.infinity,
-                height: 60,
-                decoration: BoxDecoration(
-                  color: Color(0xFFEEEEEE),
-                  image: DecorationImage(
-                    fit: BoxFit.contain,
-                    image: Image.asset(
-                      'assets/images/slider1-min_(2).png',
-                    ).image,
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 0, 0, 5),
+                child: Container(
+                  width: double.infinity,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFEEEEEE),
+                    image: DecorationImage(
+                      fit: BoxFit.contain,
+                      image: Image.asset(
+                        'assets/images/slider1-min_(2).png',
+                      ).image,
+                    ),
                   ),
-                ),
-                child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        'BE GORGEOUS',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'inter sans serif',
-                              color: Color(0xFFED1B6F),
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
-                      ),
-                      Text(
-                        'LOOK GORGEOUS',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'inter sans serif',
-                              color: Color(0xFFED1B6F),
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
-                      ),
-                      Text(
-                        'INSIDE OUT',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'inter sans serif',
-                              color: Color(0xFFED1B6F),
-                              fontWeight: FontWeight.w500,
-                              useGoogleFonts: false,
-                            ),
-                      ),
-                    ],
+                  child: Padding(
+                    padding: EdgeInsetsDirectional.fromSTEB(0, 0, 20, 0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          'BE GORGEOUS',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Color(0xFFED1B6F),
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
+                        Text(
+                          'LOOK GORGEOUS',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Color(0xFFED1B6F),
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
+                        Text(
+                          'INSIDE OUT',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Color(0xFFED1B6F),
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5, 20, 5, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                   child: StreamBuilder<List<ProductsRecord>>(
                     stream: queryProductsRecord(),
                     builder: (context, snapshot) {
@@ -362,7 +374,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               listViewProductsRecordList[listViewIndex];
                           return Padding(
                             padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 0, 10, 10),
+                                EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                             child: Card(
                               clipBehavior: Clip.antiAliasWithSaveLayer,
                               color: Color(0xFFF5F5F5),
@@ -371,54 +383,67 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Image.network(
-                                    'https://picsum.photos/seed/531/600',
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
+                                  InkWell(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProductDetailsWidget(),
+                                        ),
+                                      );
+                                    },
+                                    child: Image.asset(
+                                      'assets/images/da_pill-min.png',
+                                      width: 120,
+                                      height: 120,
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 60, 0),
+                                        0, 0, 2, 0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
-                                          MainAxisAlignment.start,
+                                          MainAxisAlignment.spaceBetween,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          'Item Name',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'inter sans serif',
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.normal,
-                                                useGoogleFonts: false,
-                                              ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 2, 0),
+                                          child: Text(
+                                            'D.A Pills 15 Days',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      'inter sans serif',
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.normal,
+                                                  useGoogleFonts: false,
+                                                ),
+                                          ),
                                         ),
-                                        Text(
-                                          'Description',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'inter sans serif',
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.normal,
-                                                useGoogleFonts: false,
-                                              ),
-                                        ),
-                                        Text(
-                                          'R 100.00',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'inter sans serif',
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.normal,
-                                                useGoogleFonts: false,
-                                              ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 20, 0, 0),
+                                          child: Text(
+                                            'R 350.00',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      'inter sans serif',
+                                                  color: Color(0xFFED1B6F),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600,
+                                                  useGoogleFonts: false,
+                                                ),
+                                          ),
                                         ),
                                       ],
                                     ),
@@ -427,9 +452,21 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     alignment: AlignmentDirectional(0, 0),
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 0, 10, 40),
+                                          0, 40, 10, 0),
                                       child: Icon(
                                         Icons.favorite_sharp,
+                                        color: Color(0xFFED1B6F),
+                                        size: 24,
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 40, 10, 0),
+                                      child: Icon(
+                                        Icons.add_shopping_cart,
                                         color: Color(0xFFED1B6F),
                                         size: 24,
                                       ),

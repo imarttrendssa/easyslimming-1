@@ -37,14 +37,6 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-              child: Icon(
-                Icons.search_outlined,
-                color: Color(0xFFED1B6F),
-                size: 24,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
               child: InkWell(
                 onTap: () async {
                   await Navigator.push(
@@ -66,7 +58,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                 await Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => NavBarPage(initialPage: 'products'),
+                    builder: (context) => NavBarPage(initialPage: 'cart'),
                   ),
                 );
               },
@@ -194,15 +186,20 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
               padding: EdgeInsetsDirectional.fromSTEB(16, 24, 16, 40),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
+                  Icon(
+                    Icons.favorite,
+                    color: Color(0xFFED1B6F),
+                    size: 24,
+                  ),
                   FFButtonWidget(
                     onPressed: () {
                       print('Button pressed ...');
                     },
                     text: 'Buy Now',
                     options: FFButtonOptions(
-                      width: 335,
+                      width: 150,
                       height: 50,
                       color: Color(0xFFED1B6F),
                       textStyle:
@@ -220,6 +217,11 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                       ),
                       borderRadius: 8,
                     ),
+                  ),
+                  Icon(
+                    Icons.add_shopping_cart,
+                    color: Color(0xFFED1B6F),
+                    size: 24,
                   ),
                 ],
               ),

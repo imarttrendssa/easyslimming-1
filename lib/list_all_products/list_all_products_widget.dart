@@ -68,7 +68,7 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                   await Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => NavBarPage(initialPage: 'products'),
+                      builder: (context) => NavBarPage(initialPage: 'cart'),
                     ),
                   );
                 },
@@ -120,6 +120,7 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                                       fontFamily: 'inter sans serif',
                                       color: Colors.black,
                                       fontSize: 20,
+                                      fontWeight: FontWeight.normal,
                                       useGoogleFonts: false,
                                     ),
                           ),
@@ -154,8 +155,8 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
-                            crossAxisSpacing: 10,
-                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 0,
+                            mainAxisSpacing: 0,
                             childAspectRatio: 1,
                           ),
                           scrollDirection: Axis.vertical,
@@ -177,59 +178,71 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                                     height: 100,
                                     fit: BoxFit.cover,
                                   ),
-                                  StreamBuilder<List<ProductsRecord>>(
-                                    stream: queryProductsRecord(),
-                                    builder: (context, snapshot) {
-                                      // Customize what your widget looks like when it's loading.
-                                      if (!snapshot.hasData) {
-                                        return Center(
-                                          child: SizedBox(
-                                            width: 50,
-                                            height: 50,
-                                            child: CircularProgressIndicator(
-                                              color:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primaryColor,
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5, 0, 0, 0),
+                                    child: StreamBuilder<List<ProductsRecord>>(
+                                      stream: queryProductsRecord(),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: CircularProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                              ),
                                             ),
-                                          ),
+                                          );
+                                        }
+                                        List<ProductsRecord>
+                                            itemnameProductsRecordList =
+                                            snapshot.data;
+                                        return Text(
+                                          'item name',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'inter sans serif',
+                                                fontSize: 15,
+                                                useGoogleFonts: false,
+                                              ),
                                         );
-                                      }
-                                      List<ProductsRecord>
-                                          itemnameProductsRecordList =
-                                          snapshot.data;
-                                      return Text(
-                                        'item name',
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyText1
-                                            .override(
-                                              fontFamily: 'inter sans serif',
-                                              fontSize: 15,
-                                              useGoogleFonts: false,
-                                            ),
-                                      );
-                                    },
+                                      },
+                                    ),
                                   ),
-                                  Text(
-                                    'description',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'inter sans serif',
-                                          fontSize: 17,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: false,
-                                        ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5, 0, 0, 0),
+                                    child: Text(
+                                      'description',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'inter sans serif',
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.normal,
+                                            useGoogleFonts: false,
+                                          ),
+                                    ),
                                   ),
-                                  Text(
-                                    'R 100.00',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'inter sans serif',
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.normal,
-                                          useGoogleFonts: false,
-                                        ),
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        5, 0, 0, 0),
+                                    child: Text(
+                                      'R 100.00',
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyText1
+                                          .override(
+                                            fontFamily: 'inter sans serif',
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.normal,
+                                            useGoogleFonts: false,
+                                          ),
+                                    ),
                                   ),
                                 ],
                               ),

@@ -1,7 +1,12 @@
+import '../auth/auth_util.dart';
+import '../backend/backend.dart';
+import '../backend/firebase_storage/storage.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../flutter_flow/upload_media.dart';
 import '../reset_pwd/reset_pwd_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -13,6 +18,7 @@ class ProfileWidget extends StatefulWidget {
 }
 
 class _ProfileWidgetState extends State<ProfileWidget> {
+  String uploadedFileUrl = '';
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -36,7 +42,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               'Profile',
               style: FlutterFlowTheme.of(context).title2.override(
                     fontFamily: 'inter sans serif',
-                    color: Colors.black,
+                    color: Color(0xFFED1B6F),
                     fontSize: 28,
                     fontWeight: FontWeight.w500,
                     useGoogleFonts: false,
@@ -66,15 +72,52 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
-                      Container(
-                        width: 76,
-                        height: 76,
-                        clipBehavior: Clip.antiAlias,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.asset(
-                          'assets/images/df3hg_',
+                      InkWell(
+                        onTap: () async {
+                          final selectedMedia =
+                              await selectMediaWithSourceBottomSheet(
+                            context: context,
+                            maxWidth: 70.00,
+                            maxHeight: 70.00,
+                            allowPhoto: true,
+                            pickerFontFamily: 'inter sans serif',
+                          );
+                          if (selectedMedia != null &&
+                              validateFileFormat(
+                                  selectedMedia.storagePath, context)) {
+                            showUploadMessage(
+                              context,
+                              'Uploading file...',
+                              showLoading: true,
+                            );
+                            final downloadUrl = await uploadData(
+                                selectedMedia.storagePath, selectedMedia.bytes);
+                            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                            if (downloadUrl != null) {
+                              setState(() => uploadedFileUrl = downloadUrl);
+                              showUploadMessage(
+                                context,
+                                'Success!',
+                              );
+                            } else {
+                              showUploadMessage(
+                                context,
+                                'Failed to upload media',
+                              );
+                              return;
+                            }
+                          }
+                        },
+                        child: Container(
+                          width: 76,
+                          height: 76,
+                          clipBehavior: Clip.antiAlias,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.asset(
+                            'assets/images/df3hg_',
+                          ),
                         ),
                       ),
                       Padding(
@@ -83,35 +126,63 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           mainAxisSize: MainAxisSize.max,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                              child: Text(
-                                '[User Name Here]',
-                                style: FlutterFlowTheme.of(context)
-                                    .title3
-                                    .override(
-                                      fontFamily: 'inter sans serif',
-                                      color: Colors.black,
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.w500,
-                                      useGoogleFonts: false,
-                                    ),
-                              ),
+                            Text(
+                              '[User Name Here]',
+                              style:
+                                  FlutterFlowTheme.of(context).title3.override(
+                                        fontFamily: 'inter sans serif',
+                                        color: Colors.black,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.w500,
+                                        useGoogleFonts: false,
+                                      ),
+                            ),
+                            Text(
+                              'User.name@domainname.com',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText2
+                                  .override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Colors.black,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal,
+                                    useGoogleFonts: false,
+                                  ),
                             ),
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
-                              child: Text(
-                                'User.name@domainname.com',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyText2
-                                    .override(
-                                      fontFamily: 'Outfit',
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                                  EdgeInsetsDirectional.fromSTEB(0, 2, 0, 0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  final usersCreateData = createUsersRecordData(
+                                    photoUrl: uploadedFileUrl,
+                                  );
+                                  await UsersRecord.collection
+                                      .doc()
+                                      .set(usersCreateData);
+                                },
+                                text: 'Save',
+                                icon: Icon(
+                                  Icons.save_outlined,
+                                  size: 20,
+                                ),
+                                options: FFButtonOptions(
+                                  width: 90,
+                                  height: 30,
+                                  color: Color(0xFFED1B6F),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .subtitle2
+                                      .override(
+                                        fontFamily: 'inter sans serif',
+                                        color: Colors.white,
+                                        useGoogleFonts: false,
+                                      ),
+                                  borderSide: BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1,
+                                  ),
+                                  borderRadius: 6,
+                                ),
                               ),
                             ),
                           ],
@@ -240,10 +311,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             'Terms & Services',
                             style:
                                 FlutterFlowTheme.of(context).bodyText2.override(
-                                      fontFamily: 'Roboto',
+                                      fontFamily: 'inter sans serif',
                                       color: Color(0xFF57636C),
                                       fontSize: 14,
                                       fontWeight: FontWeight.normal,
+                                      useGoogleFonts: false,
                                     ),
                           ),
                         ),
@@ -290,10 +362,11 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                             'Contact Us',
                             style:
                                 FlutterFlowTheme.of(context).bodyText2.override(
-                                      fontFamily: 'Outfit',
+                                      fontFamily: 'inter sans serif',
                                       color: Color(0xFF57636C),
                                       fontSize: 14,
                                       fontWeight: FontWeight.normal,
+                                      useGoogleFonts: false,
                                     ),
                           ),
                         ),
