@@ -150,7 +150,7 @@ class _NavBarPageState extends State<NavBarPage> {
               Icons.favorite_border_rounded,
               size: 24,
             ),
-            label: 'wishlist',
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(

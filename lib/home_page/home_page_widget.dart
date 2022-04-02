@@ -2,6 +2,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
+import '../login/login_widget.dart';
 import '../main.dart';
 import '../product_details/product_details_widget.dart';
 import 'package:flutter/material.dart';
@@ -67,6 +68,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 },
                 child: Icon(
                   Icons.shopping_cart_outlined,
+                  color: Color(0xFFED1B6F),
+                  size: 24,
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+              child: InkWell(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginWidget(),
+                    ),
+                  );
+                },
+                child: Icon(
+                  Icons.person_add_alt_1_outlined,
                   color: Color(0xFFED1B6F),
                   size: 24,
                 ),
@@ -172,7 +191,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 5),
                   child: StreamBuilder<List<ProductsRecord>>(
                     stream: queryProductsRecord(
-                      limit: 8,
+                      queryBuilder: (productsRecord) =>
+                          productsRecord.orderBy('price', descending: true),
+                      limit: 2,
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -222,12 +243,19 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>
-                                                ProductDetailsWidget(),
+                                                ProductDetailsWidget(
+                                              productDetails:
+                                                  gridViewProductsRecord
+                                                      .reference,
+                                            ),
                                           ),
                                         );
                                       },
-                                      child: Image.asset(
-                                        'assets/images/combo.png',
+                                      child: Image.network(
+                                        valueOrDefault<String>(
+                                          gridViewProductsRecord.image,
+                                          'image',
+                                        ),
                                         height: 130,
                                         fit: BoxFit.contain,
                                       ),
@@ -237,7 +265,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         6, 0, 0, 0),
                                     child: Text(
-                                      'Rapit slim Combo',
+                                      valueOrDefault<String>(
+                                        gridViewProductsRecord.productName,
+                                        'Product Name',
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
@@ -257,7 +288,11 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 0, 30, 0),
                                         child: Text(
-                                          'R 599.00',
+                                          'R ${valueOrDefault<String>(
+                                            gridViewProductsRecord.price
+                                                .toString(),
+                                            'price',
+                                          )}',
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -372,108 +407,108 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         itemBuilder: (context, listViewIndex) {
                           final listViewProductsRecord =
                               listViewProductsRecordList[listViewIndex];
-                          return Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                            child: Card(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              color: Color(0xFFF5F5F5),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  InkWell(
-                                    onTap: () async {
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              ProductDetailsWidget(),
+                          return Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: Color(0xFFF5F5F5),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                  onTap: () async {
+                                    await Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            ProductDetailsWidget(
+                                          productDetails:
+                                              listViewProductsRecord.reference,
                                         ),
-                                      );
-                                    },
-                                    child: Image.asset(
-                                      'assets/images/da_pill-min.png',
-                                      width: 120,
-                                      height: 120,
-                                      fit: BoxFit.fill,
+                                      ),
+                                    );
+                                  },
+                                  child: Image.network(
+                                    valueOrDefault<String>(
+                                      listViewProductsRecord.image,
+                                      'image',
                                     ),
+                                    width: 130,
+                                    height: 130,
+                                    fit: BoxFit.fill,
                                   ),
-                                  Padding(
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0, 0, 2, 0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 0, 2, 0),
+                                        child: Text(
+                                          valueOrDefault<String>(
+                                            listViewProductsRecord.productName,
+                                            'product name',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'inter sans serif',
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.normal,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            0, 20, 0, 0),
+                                        child: Text(
+                                          'R ${listViewProductsRecord.price.toString()}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyText1
+                                              .override(
+                                                fontFamily: 'inter sans serif',
+                                                color: Color(0xFFED1B6F),
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w600,
+                                                useGoogleFonts: false,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 0, 2, 0),
-                                    child: Column(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 2, 0),
-                                          child: Text(
-                                            'D.A Pills 15 Days',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      'inter sans serif',
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.normal,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 20, 0, 0),
-                                          child: Text(
-                                            'R 350.00',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      'inter sans serif',
-                                                  color: Color(0xFFED1B6F),
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
+                                        0, 40, 10, 0),
+                                    child: Icon(
+                                      Icons.favorite_sharp,
+                                      color: Color(0xFFED1B6F),
+                                      size: 24,
                                     ),
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 40, 10, 0),
-                                      child: Icon(
-                                        Icons.favorite_sharp,
-                                        color: Color(0xFFED1B6F),
-                                        size: 24,
-                                      ),
+                                ),
+                                Align(
+                                  alignment: AlignmentDirectional(0, 0),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0, 40, 10, 0),
+                                    child: Icon(
+                                      Icons.add_shopping_cart,
+                                      color: Color(0xFFED1B6F),
+                                      size: 24,
                                     ),
                                   ),
-                                  Align(
-                                    alignment: AlignmentDirectional(0, 0),
-                                    child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0, 40, 10, 0),
-                                      child: Icon(
-                                        Icons.add_shopping_cart,
-                                        color: Color(0xFFED1B6F),
-                                        size: 24,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           );
                         },

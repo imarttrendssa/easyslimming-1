@@ -173,7 +173,7 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                                 crossAxisAlignment: CrossAxisAlignment.stretch,
                                 children: [
                                   Image.network(
-                                    'https://picsum.photos/seed/737/600',
+                                    gridViewProductsRecord.image,
                                     width: 100,
                                     height: 100,
                                     fit: BoxFit.cover,
@@ -202,7 +202,10 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                                             itemnameProductsRecordList =
                                             snapshot.data;
                                         return Text(
-                                          'item name',
+                                          valueOrDefault<String>(
+                                            gridViewProductsRecord.productName,
+                                            'product name',
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -218,22 +221,10 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         5, 0, 0, 0),
                                     child: Text(
-                                      'description',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'inter sans serif',
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.normal,
-                                            useGoogleFonts: false,
-                                          ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5, 0, 0, 0),
-                                    child: Text(
-                                      'R 100.00',
+                                      'R ${valueOrDefault<String>(
+                                        gridViewProductsRecord.price.toString(),
+                                        'price',
+                                      )}',
                                       style: FlutterFlowTheme.of(context)
                                           .bodyText1
                                           .override(
