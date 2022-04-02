@@ -191,6 +191,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                             productDetailsProductsRecord.productDescription,
                             'description',
                           ),
+                          textAlign: TextAlign.justify,
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'inter sans serif',

@@ -2,6 +2,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
+import '../product_details/product_details_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -131,7 +132,7 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
+                    padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                     child: StreamBuilder<List<ProductsRecord>>(
                       stream: queryProductsRecord(),
                       builder: (context, snapshot) {
@@ -148,91 +149,122 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                             ),
                           );
                         }
-                        List<ProductsRecord> gridViewProductsRecordList =
+                        List<ProductsRecord> listViewProductsRecordList =
                             snapshot.data;
-                        return GridView.builder(
+                        return ListView.builder(
                           padding: EdgeInsets.zero,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 0,
-                            mainAxisSpacing: 0,
-                            childAspectRatio: 1,
-                          ),
                           scrollDirection: Axis.vertical,
-                          itemCount: gridViewProductsRecordList.length,
-                          itemBuilder: (context, gridViewIndex) {
-                            final gridViewProductsRecord =
-                                gridViewProductsRecordList[gridViewIndex];
+                          itemCount: listViewProductsRecordList.length,
+                          itemBuilder: (context, listViewIndex) {
+                            final listViewProductsRecord =
+                                listViewProductsRecordList[listViewIndex];
                             return Card(
                               clipBehavior: Clip.antiAliasWithSaveLayer,
                               color: Color(0xFFF5F5F5),
-                              child: Column(
+                              child: Row(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Image.network(
-                                    gridViewProductsRecord.image,
-                                    width: 100,
-                                    height: 100,
-                                    fit: BoxFit.cover,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        5, 0, 0, 0),
-                                    child: StreamBuilder<List<ProductsRecord>>(
-                                      stream: queryProductsRecord(),
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return Center(
-                                            child: SizedBox(
-                                              width: 50,
-                                              height: 50,
-                                              child: CircularProgressIndicator(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryColor,
-                                              ),
-                                            ),
-                                          );
-                                        }
-                                        List<ProductsRecord>
-                                            itemnameProductsRecordList =
-                                            snapshot.data;
-                                        return Text(
-                                          valueOrDefault<String>(
-                                            gridViewProductsRecord.productName,
-                                            'product name',
+                                  InkWell(
+                                    onTap: () async {
+                                      await Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ProductDetailsWidget(
+                                            productDetails:
+                                                listViewProductsRecord
+                                                    .reference,
                                           ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'inter sans serif',
-                                                fontSize: 15,
-                                                useGoogleFonts: false,
-                                              ),
-                                        );
-                                      },
+                                        ),
+                                      );
+                                    },
+                                    child: Image.network(
+                                      valueOrDefault<String>(
+                                        listViewProductsRecord.image,
+                                        'image',
+                                      ),
+                                      width: 130,
+                                      height: 160,
+                                      fit: BoxFit.fill,
                                     ),
                                   ),
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        5, 0, 0, 0),
-                                    child: Text(
-                                      'R ${valueOrDefault<String>(
-                                        gridViewProductsRecord.price.toString(),
-                                        'price',
-                                      )}',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'inter sans serif',
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.normal,
-                                            useGoogleFonts: false,
+                                        0, 0, 2, 0),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 2, 0),
+                                          child: Text(
+                                            valueOrDefault<String>(
+                                              listViewProductsRecord
+                                                  .productName,
+                                              'product name',
+                                            ),
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      'inter sans serif',
+                                                  color: Colors.black,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.normal,
+                                                  useGoogleFonts: false,
+                                                ),
                                           ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 20, 0, 0),
+                                          child: Text(
+                                            'R ${listViewProductsRecord.price.toString()}',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyText1
+                                                .override(
+                                                  fontFamily:
+                                                      'inter sans serif',
+                                                  color: Color(0xFFED1B6F),
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w600,
+                                                  useGoogleFonts: false,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 40, 10, 0),
+                                      child: Icon(
+                                        Icons.favorite_sharp,
+                                        color: Color(0xFFED1B6F),
+                                        size: 24,
+                                      ),
+                                    ),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0, 0),
+                                    child: Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0, 40, 10, 0),
+                                      child: Icon(
+                                        Icons.add_shopping_cart,
+                                        color: Color(0xFFED1B6F),
+                                        size: 24,
+                                      ),
                                     ),
                                   ),
                                 ],

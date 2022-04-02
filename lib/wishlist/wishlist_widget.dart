@@ -104,8 +104,8 @@ class _WishlistWidgetState extends State<WishlistWidget> {
             ),
           ),
           Expanded(
-            child: StreamBuilder<List<ProductsRecord>>(
-              stream: queryProductsRecord(),
+            child: StreamBuilder<List<WishlistRecord>>(
+              stream: queryWishlistRecord(),
               builder: (context, snapshot) {
                 // Customize what your widget looks like when it's loading.
                 if (!snapshot.hasData) {
@@ -119,7 +119,7 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                     ),
                   );
                 }
-                List<ProductsRecord> mainContentProductsRecordList =
+                List<WishlistRecord> mainContentWishlistRecordList =
                     snapshot.data;
                 return SingleChildScrollView(
                   child: Column(
@@ -127,10 +127,10 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children:
-                        List.generate(mainContentProductsRecordList.length,
+                        List.generate(mainContentWishlistRecordList.length,
                             (mainContentIndex) {
-                      final mainContentProductsRecord =
-                          mainContentProductsRecordList[mainContentIndex];
+                      final mainContentWishlistRecord =
+                          mainContentWishlistRecordList[mainContentIndex];
                       return Row(
                         mainAxisSize: MainAxisSize.max,
                         children: [
@@ -194,30 +194,12 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
                                         children: [
-                                          Text(
-                                            'Desc',
-                                            style: FlutterFlowTheme.of(context)
-                                                .subtitle1
-                                                .override(
-                                                  fontFamily:
-                                                      'inter sans serif',
-                                                  color: Color(0xFF15212B),
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.normal,
-                                                  useGoogleFonts: false,
-                                                ),
-                                          ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children: [
                                           Expanded(
                                             child: Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0, 4, 4, 0),
                                               child: Text(
-                                                'R',
+                                                'R ${mainContentWishlistRecord.price.toString()}',
                                                 style:
                                                     FlutterFlowTheme.of(context)
                                                         .bodyText1
@@ -246,14 +228,12 @@ class _WishlistWidgetState extends State<WishlistWidget> {
                                     children: [
                                       Icon(
                                         Icons.add_shopping_cart,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                        color: Color(0xFFED1B6F),
                                         size: 24,
                                       ),
                                       Icon(
                                         Icons.delete_outlined,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryColor,
+                                        color: Color(0xFFED1B6F),
                                         size: 24,
                                       ),
                                     ],

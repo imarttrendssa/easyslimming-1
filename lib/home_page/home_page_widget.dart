@@ -1,4 +1,5 @@
 import '../backend/backend.dart';
+import '../cart/cart_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -273,6 +274,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                           .bodyText1
                                           .override(
                                             fontFamily: 'inter sans serif',
+                                            color: Colors.black,
                                             fontSize: 15,
                                             fontWeight: FontWeight.normal,
                                             useGoogleFonts: false,
@@ -308,10 +310,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         color: Color(0xFFED1B6F),
                                         size: 24,
                                       ),
-                                      Icon(
-                                        Icons.add_shopping_cart,
-                                        color: Color(0xFFED1B6F),
-                                        size: 24,
+                                      InkWell(
+                                        onTap: () async {
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) => CartWidget(
+                                                addProductToCart:
+                                                    gridViewProductsRecord
+                                                        .reference,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                        child: Icon(
+                                          Icons.add_shopping_cart,
+                                          color: Color(0xFFED1B6F),
+                                          size: 24,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -345,15 +361,18 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Text(
-                          'BE GORGEOUS',
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
-                                    fontFamily: 'inter sans serif',
-                                    color: Color(0xFFED1B6F),
-                                    fontWeight: FontWeight.w500,
-                                    useGoogleFonts: false,
-                                  ),
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
+                          child: Text(
+                            'BE GORGEOUS',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'inter sans serif',
+                                      color: Color(0xFFED1B6F),
+                                      fontWeight: FontWeight.w500,
+                                      useGoogleFonts: false,
+                                    ),
+                          ),
                         ),
                         Text(
                           'LOOK GORGEOUS',
@@ -384,7 +403,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                 child: Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                   child: StreamBuilder<List<ProductsRecord>>(
-                    stream: queryProductsRecord(),
+                    stream: queryProductsRecord(
+                      limit: 8,
+                    ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -433,7 +454,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       'image',
                                     ),
                                     width: 130,
-                                    height: 130,
+                                    height: 160,
                                     fit: BoxFit.fill,
                                   ),
                                 ),
@@ -459,6 +480,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               .bodyText1
                                               .override(
                                                 fontFamily: 'inter sans serif',
+                                                color: Colors.black,
                                                 fontSize: 15,
                                                 fontWeight: FontWeight.normal,
                                                 useGoogleFonts: false,
@@ -501,10 +523,24 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   child: Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
                                         0, 40, 10, 0),
-                                    child: Icon(
-                                      Icons.add_shopping_cart,
-                                      color: Color(0xFFED1B6F),
-                                      size: 24,
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => CartWidget(
+                                              addProductToCart:
+                                                  listViewProductsRecord
+                                                      .reference,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Icon(
+                                        Icons.add_shopping_cart,
+                                        color: Color(0xFFED1B6F),
+                                        size: 24,
+                                      ),
                                     ),
                                   ),
                                 ),
