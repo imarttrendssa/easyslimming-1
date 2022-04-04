@@ -3,6 +3,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../list_all_products/list_all_products_widget.dart';
 import '../main.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,7 +36,7 @@ class _ProductsWidgetState extends State<ProductsWidget> {
           mainAxisSize: MainAxisSize.max,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 200, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 170, 0),
               child: Image.asset(
                 'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
                 width: 60,
@@ -52,38 +53,75 @@ class _ProductsWidgetState extends State<ProductsWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-              child: InkWell(
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NavBarPage(initialPage: 'wishlist'),
-                    ),
-                  );
-                },
-                child: Icon(
-                  Icons.favorite_border,
-                  color: Color(0xFFED1B6F),
-                  size: 24,
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+              child: Badge(
+                badgeContent: Text(
+                  '1',
+                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'inter sans serif',
+                        color: Colors.white,
+                        useGoogleFonts: false,
+                      ),
+                ),
+                showBadge: true,
+                shape: BadgeShape.circle,
+                badgeColor: Color(0xFFED1B6F),
+                elevation: 4,
+                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                position: BadgePosition.topEnd(),
+                animationType: BadgeAnimationType.scale,
+                toAnimate: true,
+                child: InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            NavBarPage(initialPage: 'wishlist'),
+                      ),
+                    );
+                  },
+                  child: Icon(
+                    Icons.favorite_border,
+                    color: Color(0xFFED1B6F),
+                    size: 30,
+                  ),
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-              child: InkWell(
-                onTap: () async {
-                  await Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => NavBarPage(initialPage: 'cart'),
-                    ),
-                  );
-                },
-                child: Icon(
-                  Icons.shopping_cart_outlined,
-                  color: Color(0xFFED1B6F),
-                  size: 24,
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+              child: Badge(
+                badgeContent: Text(
+                  '1',
+                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'inter sans serif',
+                        color: Colors.white,
+                        useGoogleFonts: false,
+                      ),
+                ),
+                showBadge: true,
+                shape: BadgeShape.circle,
+                badgeColor: Color(0xFFED1B6F),
+                elevation: 4,
+                padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                position: BadgePosition.topEnd(),
+                animationType: BadgeAnimationType.scale,
+                toAnimate: true,
+                child: InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NavBarPage(initialPage: 'cart'),
+                      ),
+                    );
+                  },
+                  child: Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Color(0xFFED1B6F),
+                    size: 30,
+                  ),
                 ),
               ),
             ),
