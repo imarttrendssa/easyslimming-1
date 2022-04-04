@@ -1,6 +1,9 @@
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../list_all_products/list_all_products_widget.dart';
+import '../main.dart';
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,31 +30,106 @@ class _ProductsWidgetState extends State<ProductsWidget> {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFE5E5E5),
         automaticallyImplyLeading: false,
         title: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
-              width: 60,
-              height: 60,
-              fit: BoxFit.cover,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 170, 0),
+              child: Image.asset(
+                'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
+                width: 60,
+                height: 60,
+                fit: BoxFit.cover,
+              ),
             ),
-            Text(
-              'Skip',
-              style: FlutterFlowTheme.of(context).title3.override(
-                    fontFamily: 'inter sans serif',
-                    fontSize: 25,
-                    useGoogleFonts: false,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
+              child: Icon(
+                Icons.search_outlined,
+                color: Color(0xFFED1B6F),
+                size: 24,
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+              child: Badge(
+                badgeContent: Text(
+                  '1',
+                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'inter sans serif',
+                        color: Colors.white,
+                        useGoogleFonts: false,
+                      ),
+                ),
+                showBadge: true,
+                shape: BadgeShape.circle,
+                badgeColor: Color(0xFFED1B6F),
+                elevation: 4,
+                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                position: BadgePosition.topEnd(),
+                animationType: BadgeAnimationType.scale,
+                toAnimate: true,
+                child: InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            NavBarPage(initialPage: 'wishlist'),
+                      ),
+                    );
+                  },
+                  child: Icon(
+                    Icons.favorite_border,
+                    color: Color(0xFFED1B6F),
+                    size: 30,
                   ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+              child: Badge(
+                badgeContent: Text(
+                  '1',
+                  style: FlutterFlowTheme.of(context).bodyText1.override(
+                        fontFamily: 'inter sans serif',
+                        color: Colors.white,
+                        useGoogleFonts: false,
+                      ),
+                ),
+                showBadge: true,
+                shape: BadgeShape.circle,
+                badgeColor: Color(0xFFED1B6F),
+                elevation: 4,
+                padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                position: BadgePosition.topEnd(),
+                animationType: BadgeAnimationType.scale,
+                toAnimate: true,
+                child: InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => NavBarPage(initialPage: 'cart'),
+                      ),
+                    );
+                  },
+                  child: Icon(
+                    Icons.shopping_cart_outlined,
+                    color: Color(0xFFED1B6F),
+                    size: 30,
+                  ),
+                ),
+              ),
             ),
           ],
         ),
         actions: [],
-        centerTitle: true,
-        elevation: 4,
+        centerTitle: false,
+        elevation: 0,
       ),
       backgroundColor: Color(0xFFE5E5E5),
       body: SafeArea(
@@ -115,6 +193,7 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                         'Products',
                         style: FlutterFlowTheme.of(context).bodyText1.override(
                               fontFamily: 'inter sans serif',
+                              color: Colors.black,
                               fontSize: 50,
                               useGoogleFonts: false,
                             ),
@@ -122,13 +201,26 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-                      child: Text(
-                        'see all',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'inter sans serif',
-                              fontSize: 20,
-                              useGoogleFonts: false,
+                      child: InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ListAllProductsWidget(),
                             ),
+                          );
+                        },
+                        child: Text(
+                          'see all',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.normal,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
                       ),
                     ),
                   ],
@@ -139,7 +231,7 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
                   child: StreamBuilder<List<ProductsRecord>>(
                     stream: queryProductsRecord(
-                      limit: 4,
+                      limit: 8,
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -160,8 +252,8 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                         padding: EdgeInsets.zero,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 0,
+                          mainAxisSpacing: 0,
                           childAspectRatio: 1,
                         ),
                         scrollDirection: Axis.vertical,
@@ -178,62 +270,67 @@ class _ProductsWidgetState extends State<ProductsWidget> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Image.network(
-                                  'https://picsum.photos/seed/737/600',
+                                  gridViewProductsRecord.image,
                                   width: 100,
                                   height: 100,
                                   fit: BoxFit.cover,
                                 ),
-                                StreamBuilder<List<ProductsRecord>>(
-                                  stream: queryProductsRecord(),
-                                  builder: (context, snapshot) {
-                                    // Customize what your widget looks like when it's loading.
-                                    if (!snapshot.hasData) {
-                                      return Center(
-                                        child: SizedBox(
-                                          width: 50,
-                                          height: 50,
-                                          child: CircularProgressIndicator(
-                                            color: FlutterFlowTheme.of(context)
-                                                .primaryColor,
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5, 0, 0, 0),
+                                  child: StreamBuilder<List<ProductsRecord>>(
+                                    stream: queryProductsRecord(),
+                                    builder: (context, snapshot) {
+                                      // Customize what your widget looks like when it's loading.
+                                      if (!snapshot.hasData) {
+                                        return Center(
+                                          child: SizedBox(
+                                            width: 50,
+                                            height: 50,
+                                            child: CircularProgressIndicator(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primaryColor,
+                                            ),
                                           ),
+                                        );
+                                      }
+                                      List<ProductsRecord>
+                                          itemnameProductsRecordList =
+                                          snapshot.data;
+                                      return Text(
+                                        valueOrDefault<String>(
+                                          gridViewProductsRecord.productName,
+                                          'product name',
                                         ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyText1
+                                            .override(
+                                              fontFamily: 'inter sans serif',
+                                              fontSize: 15,
+                                              useGoogleFonts: false,
+                                            ),
                                       );
-                                    }
-                                    List<ProductsRecord>
-                                        textProductsRecordList = snapshot.data;
-                                    return Text(
-                                      'item name',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'inter sans serif',
-                                            fontSize: 15,
-                                            useGoogleFonts: false,
-                                          ),
-                                    );
-                                  },
+                                    },
+                                  ),
                                 ),
-                                Text(
-                                  'description',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'inter sans serif',
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.normal,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                                Text(
-                                  'R 100.00',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'inter sans serif',
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.normal,
-                                        useGoogleFonts: false,
-                                      ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      5, 0, 0, 0),
+                                  child: Text(
+                                    'R ${valueOrDefault<String>(
+                                      gridViewProductsRecord.price.toString(),
+                                      'price',
+                                    )}',
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyText1
+                                        .override(
+                                          fontFamily: 'inter sans serif',
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.normal,
+                                          useGoogleFonts: false,
+                                        ),
+                                  ),
                                 ),
                               ],
                             ),

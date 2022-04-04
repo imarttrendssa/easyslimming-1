@@ -6,6 +6,8 @@ import '../flutter_flow/flutter_flow_util.dart';
 
 import 'schema/users_record.dart';
 import 'schema/products_record.dart';
+import 'schema/cart_record.dart';
+import 'schema/wishlist_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,6 +16,8 @@ export 'schema/serializers.dart';
 
 export 'schema/users_record.dart';
 export 'schema/products_record.dart';
+export 'schema/cart_record.dart';
+export 'schema/wishlist_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -43,6 +47,36 @@ Future<List<ProductsRecord>> queryProductsRecordOnce(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollectionOnce(ProductsRecord.collection, ProductsRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query CartRecords (as a Stream and as a Future).
+Stream<List<CartRecord>> queryCartRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(CartRecord.collection, CartRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<CartRecord>> queryCartRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(CartRecord.collection, CartRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query WishlistRecords (as a Stream and as a Future).
+Stream<List<WishlistRecord>> queryWishlistRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(WishlistRecord.collection, WishlistRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<WishlistRecord>> queryWishlistRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(WishlistRecord.collection, WishlistRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(
