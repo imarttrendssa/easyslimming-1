@@ -1,12 +1,14 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
-import '../flutter_flow/flutter_flow_count_controller.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../custom_code/actions/index.dart' as actions;
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CartWidget extends StatefulWidget {
@@ -18,7 +20,6 @@ class CartWidget extends StatefulWidget {
 
 class _CartWidgetState extends State<CartWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  int countControllerValue;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,7 @@ class _CartWidgetState extends State<CartWidget> {
                   shape: BadgeShape.circle,
                   badgeColor: Color(0xFFED1B6F),
                   elevation: 4,
-                  padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                  padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                   position: BadgePosition.topEnd(),
                   animationType: BadgeAnimationType.scale,
                   toAnimate: true,
@@ -146,7 +147,10 @@ class _CartWidgetState extends State<CartWidget> {
                   child: Padding(
                     padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 0),
                     child: StreamBuilder<List<CartRecord>>(
-                      stream: queryCartRecord(),
+                      stream: queryCartRecord(
+                        queryBuilder: (cartRecord) =>
+                            cartRecord.orderBy('prt_Quantity'),
+                      ),
                       builder: (context, snapshot) {
                         // Customize what your widget looks like when it's loading.
                         if (!snapshot.hasData) {
@@ -179,7 +183,7 @@ class _CartWidgetState extends State<CartWidget> {
                                 children: [
                                   Image.network(
                                     listViewCartRecord.image,
-                                    width: 130,
+                                    width: 140,
                                     height: 160,
                                     fit: BoxFit.fill,
                                   ),
@@ -214,116 +218,123 @@ class _CartWidgetState extends State<CartWidget> {
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 2, 0),
-                                          child: Text(
-                                            listViewCartRecord.productID,
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      'inter sans serif',
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.normal,
-                                                  useGoogleFonts: false,
-                                                ),
+                                                  0, 20, 0, 0),
+                                          child: InkWell(
+                                            onTap: () async {
+                                              await actions.countPriceandQty(
+                                                listViewCartRecord.prtQuantity,
+                                                listViewCartRecord.price,
+                                              );
+                                            },
+                                            child: Text(
+                                              'R ${functions.countPriceAndQty(listViewCartRecord.prtQuantity, listViewCartRecord.price).toString()}',
+                                              style: FlutterFlowTheme.of(
+                                                      context)
+                                                  .bodyText1
+                                                  .override(
+                                                    fontFamily:
+                                                        'inter sans serif',
+                                                    color: Color(0xFFED1B6F),
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.w600,
+                                                    useGoogleFonts: false,
+                                                  ),
+                                            ),
                                           ),
                                         ),
                                         Padding(
                                           padding:
                                               EdgeInsetsDirectional.fromSTEB(
                                                   0, 20, 0, 0),
-                                          child: Text(
-                                            listViewCartRecord.price.toString(),
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyText1
-                                                .override(
-                                                  fontFamily:
-                                                      'inter sans serif',
-                                                  color: Color(0xFFED1B6F),
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.w600,
-                                                  useGoogleFonts: false,
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 0, 10),
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    final cartUpdateData = {
+                                                      'prt_Quantity':
+                                                          FieldValue.increment(
+                                                              -1),
+                                                    };
+                                                    await listViewCartRecord
+                                                        .reference
+                                                        .update(cartUpdateData);
+                                                  },
+                                                  child: Icon(
+                                                    Icons.minimize,
+                                                    color: Color(0xFFED1B6F),
+                                                    size: 24,
+                                                  ),
                                                 ),
+                                              ),
+                                              Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(10, 0, 10, 0),
+                                                child: Text(
+                                                  valueOrDefault<String>(
+                                                    listViewCartRecord
+                                                        .prtQuantity
+                                                        .toString(),
+                                                    '1',
+                                                  ),
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyText1
+                                                      .override(
+                                                        fontFamily:
+                                                            'inter sans serif',
+                                                        color: Colors.black,
+                                                        fontSize: 20,
+                                                        useGoogleFonts: false,
+                                                      ),
+                                                ),
+                                              ),
+                                              InkWell(
+                                                onTap: () async {
+                                                  final cartUpdateData = {
+                                                    'prt_Quantity':
+                                                        FieldValue.increment(1),
+                                                  };
+                                                  await listViewCartRecord
+                                                      .reference
+                                                      .update(cartUpdateData);
+                                                },
+                                                child: Icon(
+                                                  Icons.add,
+                                                  color: Color(0xFFED1B6F),
+                                                  size: 24,
+                                                ),
+                                              ),
+                                              Align(
+                                                alignment:
+                                                    AlignmentDirectional(0, 0),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(90, 0, 0, 0),
+                                                  child: InkWell(
+                                                    onTap: () async {
+                                                      await listViewCartRecord
+                                                          .reference
+                                                          .delete();
+                                                    },
+                                                    child: Icon(
+                                                      Icons.delete_outline,
+                                                      color: Color(0xFFED1B6F),
+                                                      size: 24,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 0, 20),
-                                        child: Container(
-                                          width: 80,
-                                          height: 30,
-                                          decoration: BoxDecoration(
-                                            color: Colors.white,
-                                            borderRadius:
-                                                BorderRadius.circular(4),
-                                            shape: BoxShape.rectangle,
-                                            border: Border.all(
-                                              color: Color(0xFFED1B6F),
-                                              width: 2,
-                                            ),
-                                          ),
-                                          child: FlutterFlowCountController(
-                                            decrementIconBuilder: (enabled) =>
-                                                FaIcon(
-                                              FontAwesomeIcons.minus,
-                                              color: enabled
-                                                  ? Color(0xFFED1B6F)
-                                                  : Color(0xFFEEEEEE),
-                                              size: 12,
-                                            ),
-                                            incrementIconBuilder: (enabled) =>
-                                                FaIcon(
-                                              FontAwesomeIcons.plus,
-                                              color: enabled
-                                                  ? Color(0xFFED1B6F)
-                                                  : Color(0xFFEEEEEE),
-                                              size: 15,
-                                            ),
-                                            countBuilder: (count) => Text(
-                                              count.toString(),
-                                              style: TextStyle(
-                                                fontFamily: 'inter sans serif',
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w600,
-                                                fontSize: 20,
-                                              ),
-                                            ),
-                                            count: countControllerValue ??= 1,
-                                            updateCount: (count) => setState(
-                                                () => countControllerValue =
-                                                    count),
-                                            stepSize: 1,
-                                            contentPadding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    10, 0, 10, 0),
-                                          ),
-                                        ),
-                                      ),
-                                      Align(
-                                        alignment: AlignmentDirectional(0, 0),
-                                        child: Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0, 0, 10, 0),
-                                          child: Icon(
-                                            Icons.delete_outline,
-                                            color: Color(0xFFED1B6F),
-                                            size: 24,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
                                   ),
                                 ],
                               ),
@@ -367,7 +378,7 @@ class _CartWidgetState extends State<CartWidget> {
                                   .bodyText1
                                   .override(
                                     fontFamily: 'inter sans serif',
-                                    color: Colors.black,
+                                    color: Color(0xFFED1B6F),
                                     fontSize: 20,
                                     fontWeight: FontWeight.w600,
                                     useGoogleFonts: false,
@@ -382,7 +393,7 @@ class _CartWidgetState extends State<CartWidget> {
                           onPressed: () {
                             print('Button pressed ...');
                           },
-                          text: 'Pay Now',
+                          text: 'Checkout',
                           options: FFButtonOptions(
                             width: 335,
                             height: 40,

@@ -12,8 +12,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'home_page/home_page_widget.dart';
 import 'products/products_widget.dart';
-import 'wishlist/wishlist_widget.dart';
 import 'cart/cart_widget.dart';
+import 'wishlist/wishlist_widget.dart';
 import 'profile/profile_widget.dart';
 
 void main() async {
@@ -112,8 +112,8 @@ class _NavBarPageState extends State<NavBarPage> {
     final tabs = {
       'HomePage': HomePageWidget(),
       'products': ProductsWidget(),
-      'wishlist': WishlistWidget(),
       'cart': CartWidget(),
+      'wishlist': WishlistWidget(),
       'profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
@@ -147,18 +147,18 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
-              Icons.favorite_border_rounded,
-              size: 24,
-            ),
-            label: 'Home',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
               Icons.shopping_cart_outlined,
               size: 24,
             ),
             label: 'cart',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.favorite_border_rounded,
+              size: 24,
+            ),
+            label: 'Home',
             tooltip: '',
           ),
           BottomNavigationBarItem(

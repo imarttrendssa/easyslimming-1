@@ -12,12 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePageWidget extends StatefulWidget {
-  const HomePageWidget({
-    Key key,
-    this.addToCart,
-  }) : super(key: key);
-
-  final DocumentReference addToCart;
+  const HomePageWidget({Key key}) : super(key: key);
 
   @override
   _HomePageWidgetState createState() => _HomePageWidgetState();
@@ -85,38 +80,66 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-              child: Badge(
-                badgeContent: Text(
-                  '1',
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'inter sans serif',
-                        color: Colors.white,
-                        useGoogleFonts: false,
-                      ),
+              child: StreamBuilder<List<ProductsRecord>>(
+                stream: queryProductsRecord(
+                  singleRecord: true,
                 ),
-                showBadge: true,
-                shape: BadgeShape.circle,
-                badgeColor: Color(0xFFED1B6F),
-                elevation: 4,
-                padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                position: BadgePosition.topEnd(),
-                animationType: BadgeAnimationType.scale,
-                toAnimate: true,
-                child: InkWell(
-                  onTap: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => NavBarPage(initialPage: 'cart'),
+                builder: (context, snapshot) {
+                  // Customize what your widget looks like when it's loading.
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: SizedBox(
+                        width: 50,
+                        height: 50,
+                        child: CircularProgressIndicator(
+                          color: FlutterFlowTheme.of(context).primaryColor,
+                        ),
                       ),
                     );
-                  },
-                  child: Icon(
-                    Icons.shopping_cart_outlined,
-                    color: Color(0xFFED1B6F),
-                    size: 30,
-                  ),
-                ),
+                  }
+                  List<ProductsRecord> badgeProductsRecordList = snapshot.data;
+                  // Return an empty Container when the document does not exist.
+                  if (snapshot.data.isEmpty) {
+                    return Container();
+                  }
+                  final badgeProductsRecord = badgeProductsRecordList.isNotEmpty
+                      ? badgeProductsRecordList.first
+                      : null;
+                  return Badge(
+                    badgeContent: Text(
+                      '1',
+                      style: FlutterFlowTheme.of(context).bodyText1.override(
+                            fontFamily: 'inter sans serif',
+                            color: Colors.white,
+                            useGoogleFonts: false,
+                          ),
+                    ),
+                    showBadge: true,
+                    shape: BadgeShape.circle,
+                    badgeColor: Color(0xFFED1B6F),
+                    elevation: 4,
+                    padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                    position: BadgePosition.topEnd(),
+                    animationType: BadgeAnimationType.scale,
+                    toAnimate: true,
+                    child: InkWell(
+                      onTap: () async {
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                NavBarPage(initialPage: 'cart'),
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        Icons.shopping_cart_outlined,
+                        color: Color(0xFFED1B6F),
+                        size: 30,
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
             Padding(
@@ -237,9 +260,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                   padding: EdgeInsetsDirectional.fromSTEB(5, 0, 5, 5),
                   child: StreamBuilder<List<ProductsRecord>>(
                     stream: queryProductsRecord(
-                      queryBuilder: (productsRecord) =>
-                          productsRecord.orderBy('price', descending: true),
-                      limit: 2,
+                      limit: 4,
                     ),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
@@ -333,9 +354,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            60, 0, 0, 0),
+                                            6, 0, 0, 0),
                                         child: Text(
-                                          gridViewProductsRecord.productID,
+                                          valueOrDefault<String>(
+                                            gridViewProductsRecord.quantity
+                                                .toString(),
+                                            'quantity',
+                                          ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyText1
                                               .override(
@@ -402,6 +427,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             itemName: gridViewProductsRecord
                                                 .productName,
                                             price: gridViewProductsRecord.price,
+                                            prtQuantity:
+                                                gridViewProductsRecord.quantity,
                                           );
                                           await CartRecord.collection
                                               .doc()
@@ -517,7 +544,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                             color: Color(0xFFF5F5F5),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 InkWell(
                                   onTap: () async {
@@ -544,7 +571,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 ),
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
-                                      0, 0, 2, 0),
+                                      10, 0, 2, 0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     mainAxisAlignment:
@@ -554,7 +581,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     children: [
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
-                                            0, 0, 2, 0),
+                                            0, 0, 2, 20),
                                         child: Text(
                                           valueOrDefault<String>(
                                             listViewProductsRecord.productName,
@@ -574,72 +601,102 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       Padding(
                                         padding: EdgeInsetsDirectional.fromSTEB(
                                             0, 20, 0, 0),
-                                        child: Text(
-                                          'R ${listViewProductsRecord.price.toString()}',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'inter sans serif',
-                                                color: Color(0xFFED1B6F),
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                                useGoogleFonts: false,
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0, 0, 40, 0),
+                                              child: Text(
+                                                'R ${listViewProductsRecord.price.toString()}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'inter sans serif',
+                                                          color:
+                                                              Color(0xFFED1B6F),
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          useGoogleFonts: false,
+                                                        ),
                                               ),
+                                            ),
+                                            Align(
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(50, 0, 10, 0),
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    final wishlistCreateData =
+                                                        createWishlistRecordData(
+                                                      image:
+                                                          listViewProductsRecord
+                                                              .image,
+                                                      itemName:
+                                                          listViewProductsRecord
+                                                              .productName,
+                                                      price:
+                                                          listViewProductsRecord
+                                                              .price,
+                                                    );
+                                                    await WishlistRecord
+                                                        .collection
+                                                        .doc()
+                                                        .set(
+                                                            wishlistCreateData);
+                                                  },
+                                                  child: Icon(
+                                                    Icons.favorite_sharp,
+                                                    color: Color(0xFFED1B6F),
+                                                    size: 24,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            Align(
+                                              alignment:
+                                                  AlignmentDirectional(0, 0),
+                                              child: Padding(
+                                                padding: EdgeInsetsDirectional
+                                                    .fromSTEB(0, 0, 10, 0),
+                                                child: InkWell(
+                                                  onTap: () async {
+                                                    final cartCreateData =
+                                                        createCartRecordData(
+                                                      image:
+                                                          listViewProductsRecord
+                                                              .image,
+                                                      itemName:
+                                                          listViewProductsRecord
+                                                              .productName,
+                                                      price:
+                                                          listViewProductsRecord
+                                                              .price,
+                                                      prtQuantity: 1,
+                                                    );
+                                                    await CartRecord.collection
+                                                        .doc()
+                                                        .set(cartCreateData);
+                                                  },
+                                                  child: Icon(
+                                                    Icons.add_shopping_cart,
+                                                    color: Color(0xFFED1B6F),
+                                                    size: 24,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 40, 10, 0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        final wishlistCreateData =
-                                            createWishlistRecordData(
-                                          image: listViewProductsRecord.image,
-                                          itemName: listViewProductsRecord
-                                              .productName,
-                                          price: listViewProductsRecord.price,
-                                        );
-                                        await WishlistRecord.collection
-                                            .doc()
-                                            .set(wishlistCreateData);
-                                      },
-                                      child: Icon(
-                                        Icons.favorite_sharp,
-                                        color: Color(0xFFED1B6F),
-                                        size: 24,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Align(
-                                  alignment: AlignmentDirectional(0, 0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 40, 10, 0),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        final cartCreateData =
-                                            createCartRecordData(
-                                          image: listViewProductsRecord.image,
-                                          itemName: listViewProductsRecord
-                                              .productName,
-                                          price: listViewProductsRecord.price,
-                                        );
-                                        await CartRecord.collection
-                                            .doc()
-                                            .set(cartCreateData);
-                                      },
-                                      child: Icon(
-                                        Icons.add_shopping_cart,
-                                        color: Color(0xFFED1B6F),
-                                        size: 24,
-                                      ),
-                                    ),
                                   ),
                                 ),
                               ],

@@ -109,39 +109,69 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-                  child: Badge(
-                    badgeContent: Text(
-                      '1',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'inter sans serif',
-                            color: Colors.white,
-                            useGoogleFonts: false,
-                          ),
+                  child: StreamBuilder<List<ProductsRecord>>(
+                    stream: queryProductsRecord(
+                      singleRecord: true,
                     ),
-                    showBadge: true,
-                    shape: BadgeShape.circle,
-                    badgeColor: Color(0xFFED1B6F),
-                    elevation: 4,
-                    padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                    position: BadgePosition.topEnd(),
-                    animationType: BadgeAnimationType.scale,
-                    toAnimate: true,
-                    child: InkWell(
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'cart'),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: CircularProgressIndicator(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                            ),
                           ),
                         );
-                      },
-                      child: Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Color(0xFFED1B6F),
-                        size: 30,
-                      ),
-                    ),
+                      }
+                      List<ProductsRecord> badgeProductsRecordList =
+                          snapshot.data;
+                      // Return an empty Container when the document does not exist.
+                      if (snapshot.data.isEmpty) {
+                        return Container();
+                      }
+                      final badgeProductsRecord =
+                          badgeProductsRecordList.isNotEmpty
+                              ? badgeProductsRecordList.first
+                              : null;
+                      return Badge(
+                        badgeContent: Text(
+                          '1',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Colors.white,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
+                        showBadge: true,
+                        shape: BadgeShape.circle,
+                        badgeColor: Color(0xFFED1B6F),
+                        elevation: 4,
+                        padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                        position: BadgePosition.topEnd(),
+                        animationType: BadgeAnimationType.scale,
+                        toAnimate: true,
+                        child: InkWell(
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    NavBarPage(initialPage: 'cart'),
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            Icons.shopping_cart_outlined,
+                            color: Color(0xFFED1B6F),
+                            size: 30,
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
@@ -287,6 +317,7 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                                   itemName:
                                       productDetailsProductsRecord.productName,
                                   price: productDetailsProductsRecord.price,
+                                  prtQuantity: 1,
                                 );
                                 await CartRecord.collection
                                     .doc()
