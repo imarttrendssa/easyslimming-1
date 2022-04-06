@@ -115,8 +115,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                           ),
-                          child: Image.asset(
-                            'assets/images/df3hg_',
+                          child: Image.network(
+                            '',
                           ),
                         ),
                       ),
@@ -127,7 +127,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '[User Name Here]',
+                              currentUserDisplayName,
                               style:
                                   FlutterFlowTheme.of(context).title3.override(
                                         fontFamily: 'inter sans serif',
@@ -138,7 +138,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                       ),
                             ),
                             Text(
-                              'User.name@domainname.com',
+                              currentUserEmail,
                               style: FlutterFlowTheme.of(context)
                                   .bodyText2
                                   .override(
@@ -167,7 +167,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                                   size: 20,
                                 ),
                                 options: FFButtonOptions(
-                                  width: 90,
+                                  width: 100,
                                   height: 30,
                                   color: Color(0xFFED1B6F),
                                   textStyle: FlutterFlowTheme.of(context)

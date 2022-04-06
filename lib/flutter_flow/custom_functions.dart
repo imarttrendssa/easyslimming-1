@@ -13,8 +13,7 @@ int countPriceAndQty(
   int qty,
   int prc,
 ) {
-  var val = qty * prc;
-  return val;
+  return qty * prc;
 }
 
 int sumQuantity(List<int> qty) {

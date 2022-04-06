@@ -1,9 +1,11 @@
+import '../auth/auth_util.dart';
 import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
 import '../product_details/product_details_widget.dart';
 import 'package:badges/badges.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,60 +29,31 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
         automaticallyImplyLeading: false,
         title: Row(
           mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 170, 0),
-              child: Image.asset(
-                'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
-                width: 60,
-                height: 60,
-                fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 10, 0),
-              child: Icon(
-                Icons.search_outlined,
-                color: Color(0xFFED1B6F),
-                size: 24,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-              child: Badge(
-                badgeContent: Text(
-                  '1',
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'inter sans serif',
-                        color: Colors.white,
-                        useGoogleFonts: false,
-                      ),
-                ),
-                showBadge: true,
-                shape: BadgeShape.circle,
-                badgeColor: Color(0xFFED1B6F),
-                elevation: 4,
-                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                position: BadgePosition.topEnd(),
-                animationType: BadgeAnimationType.scale,
-                toAnimate: true,
-                child: InkWell(
-                  onTap: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            NavBarPage(initialPage: 'wishlist'),
-                      ),
-                    );
-                  },
-                  child: Icon(
-                    Icons.favorite_border,
-                    color: Color(0xFFED1B6F),
-                    size: 30,
-                  ),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 210, 0),
+              child: InkWell(
+                onTap: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => NavBarPage(initialPage: 'HomePage'),
+                    ),
+                  );
+                },
+                child: Image.asset(
+                  'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
+                  width: 60,
+                  height: 60,
+                  fit: BoxFit.cover,
                 ),
               ),
+            ),
+            Icon(
+              Icons.search_outlined,
+              color: Color(0xFFED1B6F),
+              size: 24,
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
@@ -326,10 +299,26 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
                                     child: Padding(
                                       padding: EdgeInsetsDirectional.fromSTEB(
                                           0, 40, 10, 0),
-                                      child: Icon(
-                                        Icons.add_shopping_cart,
-                                        color: Color(0xFFED1B6F),
-                                        size: 24,
+                                      child: InkWell(
+                                        onTap: () async {
+                                          final cartCreateData =
+                                              createCartRecordData(
+                                            image: listViewProductsRecord.image,
+                                            itemName: listViewProductsRecord
+                                                .productName,
+                                            price: listViewProductsRecord.price,
+                                            prtQuantity:
+                                                listViewProductsRecord.quantity,
+                                          );
+                                          await CartRecord.collection
+                                              .doc()
+                                              .set(cartCreateData);
+                                        },
+                                        child: Icon(
+                                          Icons.add_shopping_cart,
+                                          color: Color(0xFFED1B6F),
+                                          size: 24,
+                                        ),
                                       ),
                                     ),
                                   ),

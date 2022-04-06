@@ -30,52 +30,15 @@ class _HomePageWidgetState extends State<HomePageWidget> {
         automaticallyImplyLeading: false,
         title: Row(
           mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 175, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 210, 0),
               child: Image.asset(
                 'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,
-              ),
-            ),
-            Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-              child: Badge(
-                badgeContent: Text(
-                  '1',
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'inter sans serif',
-                        color: Colors.white,
-                        useGoogleFonts: false,
-                      ),
-                ),
-                showBadge: true,
-                shape: BadgeShape.circle,
-                badgeColor: Color(0xFFED1B6F),
-                elevation: 4,
-                padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                position: BadgePosition.topEnd(),
-                animationType: BadgeAnimationType.scale,
-                toAnimate: true,
-                child: InkWell(
-                  onTap: () async {
-                    await Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            NavBarPage(initialPage: 'wishlist'),
-                      ),
-                    );
-                  },
-                  child: Icon(
-                    Icons.favorite_border,
-                    color: Color(0xFFED1B6F),
-                    size: 30,
-                  ),
-                ),
               ),
             ),
             Padding(
@@ -402,25 +365,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          final wishlistCreateData =
-                                              createWishlistRecordData(
-                                            image: gridViewProductsRecord.image,
-                                            itemName: gridViewProductsRecord
-                                                .productName,
-                                            price: gridViewProductsRecord.price,
-                                          );
-                                          await WishlistRecord.collection
-                                              .doc()
-                                              .set(wishlistCreateData);
-                                        },
-                                        child: Icon(
-                                          Icons.favorite,
-                                          color: Color(0xFFED1B6F),
-                                          size: 24,
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () async {
                                           final cartCreateData =
                                               createCartRecordData(
                                             image: gridViewProductsRecord.image,
@@ -624,40 +568,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               FontWeight.w600,
                                                           useGoogleFonts: false,
                                                         ),
-                                              ),
-                                            ),
-                                            Align(
-                                              alignment:
-                                                  AlignmentDirectional(0, 0),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(50, 0, 10, 0),
-                                                child: InkWell(
-                                                  onTap: () async {
-                                                    final wishlistCreateData =
-                                                        createWishlistRecordData(
-                                                      image:
-                                                          listViewProductsRecord
-                                                              .image,
-                                                      itemName:
-                                                          listViewProductsRecord
-                                                              .productName,
-                                                      price:
-                                                          listViewProductsRecord
-                                                              .price,
-                                                    );
-                                                    await WishlistRecord
-                                                        .collection
-                                                        .doc()
-                                                        .set(
-                                                            wishlistCreateData);
-                                                  },
-                                                  child: Icon(
-                                                    Icons.favorite_sharp,
-                                                    color: Color(0xFFED1B6F),
-                                                    size: 24,
-                                                  ),
-                                                ),
                                               ),
                                             ),
                                             Align(

@@ -29,9 +29,6 @@ abstract class ProductsRecord
   String get catecory;
 
   @nullable
-  BuiltList<bool> get cart;
-
-  @nullable
   int get quantity;
 
   @nullable
@@ -44,7 +41,6 @@ abstract class ProductsRecord
     ..price = 0
     ..productDescription = ''
     ..catecory = ''
-    ..cart = ListBuilder()
     ..quantity = 0;
 
   static CollectionReference get collection =>
@@ -84,5 +80,4 @@ Map<String, dynamic> createProductsRecordData({
           ..price = price
           ..productDescription = productDescription
           ..catecory = catecory
-          ..cart = null
           ..quantity = quantity));

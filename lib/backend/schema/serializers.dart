@@ -3,7 +3,9 @@ import 'package:built_value/standard_json_plugin.dart';
 import 'users_record.dart';
 import 'products_record.dart';
 import 'cart_record.dart';
-import 'wishlist_record.dart';
+import 'skin_care_record.dart';
+import 'repair_oil_record.dart';
+import 'beard_oil_record.dart';
 
 import 'index.dart';
 
@@ -17,7 +19,9 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   UsersRecord,
   ProductsRecord,
   CartRecord,
-  WishlistRecord,
+  SkinCareRecord,
+  RepairOilRecord,
+  BeardOilRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())
