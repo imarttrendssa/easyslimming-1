@@ -10,6 +10,7 @@ import 'schema/cart_record.dart';
 import 'schema/skin_care_record.dart';
 import 'schema/repair_oil_record.dart';
 import 'schema/beard_oil_record.dart';
+import 'schema/transactions_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,6 +23,7 @@ export 'schema/cart_record.dart';
 export 'schema/skin_care_record.dart';
 export 'schema/repair_oil_record.dart';
 export 'schema/beard_oil_record.dart';
+export 'schema/transactions_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -111,6 +113,23 @@ Future<List<BeardOilRecord>> queryBeardOilRecordOnce(
         int limit = -1,
         bool singleRecord = false}) =>
     queryCollectionOnce(BeardOilRecord.collection, BeardOilRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query TransactionsRecords (as a Stream and as a Future).
+Stream<List<TransactionsRecord>> queryTransactionsRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(
+        TransactionsRecord.collection, TransactionsRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<TransactionsRecord>> queryTransactionsRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(
+        TransactionsRecord.collection, TransactionsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

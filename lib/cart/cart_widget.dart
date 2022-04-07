@@ -363,86 +363,66 @@ class _CartWidgetState extends State<CartWidget> {
                         ),
                       ),
                     ),
-                    Container(
-                      width: double.infinity,
-                      height: 100,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFEEEEEE),
-                      ),
-                      child: Column(
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(20, 5, 20, 10),
+                      child: Row(
                         mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(10, 10, 10, 10),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Total Amount',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'inter sans serif',
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                                Text(
-                                  'R ${functions.countPriceAndQty(cartCartRecord.prtQuantity, cartCartRecord.price).toString()}',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyText1
-                                      .override(
-                                        fontFamily: 'inter sans serif',
-                                        color: Color(0xFFED1B6F),
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding:
-                                EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        PaymentProcessWidget(),
-                                  ),
-                                );
-                              },
-                              text: 'Checkout',
-                              options: FFButtonOptions(
-                                width: 335,
-                                height: 40,
-                                color: Color(0xFFED1B6F),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .subtitle2
-                                    .override(
+                          Text(
+                            'Total Amount',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'inter sans serif',
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontSize: 20,
-                                      fontWeight: FontWeight.w500,
                                       useGoogleFonts: false,
                                     ),
-                                elevation: 3,
-                                borderSide: BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1,
-                                ),
-                                borderRadius: 8,
-                              ),
-                            ),
+                          ),
+                          Text(
+                            'price',
+                            style:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'inter sans serif',
+                                      color: Color(0xFFED1B6F),
+                                      fontSize: 30,
+                                      useGoogleFonts: false,
+                                    ),
                           ),
                         ],
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 10),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaymentProcessWidget(),
+                            ),
+                          );
+                        },
+                        text: 'Checkout',
+                        options: FFButtonOptions(
+                          width: 335,
+                          height: 40,
+                          color: Color(0xFFED1B6F),
+                          textStyle:
+                              FlutterFlowTheme.of(context).subtitle2.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
+                                    useGoogleFonts: false,
+                                  ),
+                          elevation: 3,
+                          borderSide: BorderSide(
+                            color: Colors.transparent,
+                            width: 1,
+                          ),
+                          borderRadius: 8,
+                        ),
                       ),
                     ),
                   ],

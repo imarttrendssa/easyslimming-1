@@ -6,6 +6,7 @@ import 'cart_record.dart';
 import 'skin_care_record.dart';
 import 'repair_oil_record.dart';
 import 'beard_oil_record.dart';
+import 'transactions_record.dart';
 
 import 'index.dart';
 
@@ -22,6 +23,7 @@ const kDocumentReferenceField = 'Document__Reference__Field';
   SkinCareRecord,
   RepairOilRecord,
   BeardOilRecord,
+  TransactionsRecord,
 ])
 final Serializers serializers = (_$serializers.toBuilder()
       ..add(DocumentReferenceSerializer())

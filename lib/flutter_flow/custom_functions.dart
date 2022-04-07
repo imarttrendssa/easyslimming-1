@@ -16,9 +16,11 @@ int countPriceAndQty(
   return qty * prc;
 }
 
-int sumQuantity(List<int> qty) {
-  // sum of quantities of items in firestore
+int getTotalAmount(List<CartRecord> prices) {
+  // calculate sum of prices in documents
   int sum = 0;
-  qty.forEach((i) => sum += i);
+  for (int i = 0; i < prices.length; i++) {
+    sum += (prices[i].price * prices[i].prtQuantity);
+  }
   return sum;
 }
