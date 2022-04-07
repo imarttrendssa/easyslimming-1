@@ -17,10 +17,22 @@ int countPriceAndQty(
 }
 
 int getTotalAmount(List<CartRecord> prices) {
-  // calculate sum of prices in documents
+  // calculate sum of prices in firebase  documents
   int sum = 0;
+
   for (int i = 0; i < prices.length; i++) {
     sum += (prices[i].price * prices[i].prtQuantity);
   }
+
+  return sum;
+}
+
+int addQuantities(List<CartRecord> qty) {
+  int sum = 0;
+
+  for (int i = 0; i < qty.length; i++) {
+    sum += qty[i].prtQuantity;
+  }
+
   return sum;
 }

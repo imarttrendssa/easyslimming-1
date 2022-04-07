@@ -1,8 +1,10 @@
+import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -110,7 +112,7 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
         centerTitle: false,
         elevation: 0,
       ),
-      backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+      backgroundColor: Color(0xFFE5E5E5),
       body: SafeArea(
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -590,7 +592,7 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
                                 children: [
                                   Padding(
                                     padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 20, 0, 15),
+                                        0, 20, 0, 0),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
                                       color: Color(0xFFF5F5F5),
@@ -629,209 +631,189 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 20, 0, 15),
-                                    child: Card(
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: Color(0xFFF5F5F5),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    30, 0, 30, 0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.circle,
-                                              color: Color(0xFF224799),
-                                              size: 24,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 90, 5),
-                                            child: Image.asset(
-                                              'assets/images/x5rbw_5.png',
-                                              width: 150,
-                                              height: 40,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.info_outlined,
-                                            color: Color(0xFFED1B6F),
+                                  Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: Color(0xFFF5F5F5),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  30, 0, 30, 0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.circle,
+                                            color: Color(0xFF224799),
                                             size: 24,
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 90, 5),
+                                          child: Image.asset(
+                                            'assets/images/x5rbw_5.png',
+                                            width: 150,
+                                            height: 40,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.info_outlined,
+                                          color: Color(0xFFED1B6F),
+                                          size: 24,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 20, 0, 15),
-                                    child: Card(
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: Color(0xFFF5F5F5),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    30, 0, 30, 0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.circle,
-                                              color: Color(0xFF224799),
-                                              size: 24,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 90, 5),
-                                            child: Image.asset(
-                                              'assets/images/ml88i_4.png',
-                                              width: 150,
-                                              height: 40,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.info_outlined,
-                                            color: Color(0xFFED1B6F),
+                                  Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: Color(0xFFF5F5F5),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  30, 0, 30, 0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.circle,
+                                            color: Color(0xFF224799),
                                             size: 24,
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 90, 5),
+                                          child: Image.asset(
+                                            'assets/images/ml88i_4.png',
+                                            width: 150,
+                                            height: 40,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.info_outlined,
+                                          color: Color(0xFFED1B6F),
+                                          size: 24,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 20, 0, 15),
-                                    child: Card(
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: Color(0xFFF5F5F5),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    30, 0, 30, 0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.circle,
-                                              color: Color(0xFF224799),
-                                              size: 24,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 90, 5),
-                                            child: Image.asset(
-                                              'assets/images/albfo_3.png',
-                                              width: 150,
-                                              height: 50,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.info_outlined,
-                                            color: Color(0xFFED1B6F),
+                                  Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: Color(0xFFF5F5F5),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  30, 0, 30, 0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.circle,
+                                            color: Color(0xFF224799),
                                             size: 24,
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 90, 5),
+                                          child: Image.asset(
+                                            'assets/images/albfo_3.png',
+                                            width: 150,
+                                            height: 50,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.info_outlined,
+                                          color: Color(0xFFED1B6F),
+                                          size: 24,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 20, 0, 15),
-                                    child: Card(
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: Color(0xFFF5F5F5),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    30, 0, 30, 0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.circle,
-                                              color: Color(0xFF224799),
-                                              size: 24,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 90, 5),
-                                            child: Image.asset(
-                                              'assets/images/9hsjc_2.png',
-                                              width: 150,
-                                              height: 53,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.info_outlined,
-                                            color: Color(0xFFED1B6F),
+                                  Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: Color(0xFFF5F5F5),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  30, 0, 30, 0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.circle,
+                                            color: Color(0xFF224799),
                                             size: 24,
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 90, 5),
+                                          child: Image.asset(
+                                            'assets/images/9hsjc_2.png',
+                                            width: 150,
+                                            height: 53,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.info_outlined,
+                                          color: Color(0xFFED1B6F),
+                                          size: 24,
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0, 15, 0, 0),
-                                    child: Card(
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: Color(0xFFF5F5F5),
-                                      child: Row(
-                                        mainAxisSize: MainAxisSize.max,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    30, 0, 30, 0),
-                                            child: FaIcon(
-                                              FontAwesomeIcons.circle,
-                                              color: Color(0xFF224799),
-                                              size: 24,
-                                            ),
-                                          ),
-                                          Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0, 0, 90, 5),
-                                            child: Image.asset(
-                                              'assets/images/mcatd_1.png',
-                                              width: 150,
-                                              height: 40,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          ),
-                                          Icon(
-                                            Icons.info_outlined,
-                                            color: Color(0xFFED1B6F),
+                                  Card(
+                                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                                    color: Color(0xFFF5F5F5),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  30, 0, 30, 0),
+                                          child: FaIcon(
+                                            FontAwesomeIcons.circle,
+                                            color: Color(0xFF224799),
                                             size: 24,
                                           ),
-                                        ],
-                                      ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0, 0, 90, 5),
+                                          child: Image.asset(
+                                            'assets/images/mcatd_1.png',
+                                            width: 150,
+                                            height: 40,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                        Icon(
+                                          Icons.info_outlined,
+                                          color: Color(0xFFED1B6F),
+                                          size: 24,
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ],
@@ -878,76 +860,6 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
                           children: [
                             Padding(
                               padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 10, 0),
-                                    child: Text(
-                                      'Name:',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'inter sans serif',
-                                            color: Color(0xFFED1B6F),
-                                            fontSize: 20,
-                                            useGoogleFonts: false,
-                                          ),
-                                    ),
-                                  ),
-                                  Text(
-                                    'name',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'inter sans serif',
-                                          fontSize: 25,
-                                          useGoogleFonts: false,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        20, 0, 10, 0),
-                                    child: Text(
-                                      'Email',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyText1
-                                          .override(
-                                            fontFamily: 'inter sans serif',
-                                            color: Color(0xFFED1B6F),
-                                            fontSize: 20,
-                                            useGoogleFonts: false,
-                                          ),
-                                    ),
-                                  ),
-                                  Text(
-                                    'email',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyText1
-                                        .override(
-                                          fontFamily: 'inter sans serif',
-                                          fontSize: 25,
-                                          useGoogleFonts: false,
-                                        ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Padding(
-                              padding:
                                   EdgeInsetsDirectional.fromSTEB(0, 40, 0, 0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -971,17 +883,38 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
                                   ),
                                   Align(
                                     alignment: AlignmentDirectional(0, 0),
-                                    child: Text(
-                                      'price',
-                                      style: FlutterFlowTheme.of(context)
-                                          .title1
-                                          .override(
-                                            fontFamily: 'inter sans serif',
-                                            color: Color(0xFFED1B6F),
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold,
-                                            useGoogleFonts: false,
-                                          ),
+                                    child: StreamBuilder<List<CartRecord>>(
+                                      stream: queryCartRecord(),
+                                      builder: (context, snapshot) {
+                                        // Customize what your widget looks like when it's loading.
+                                        if (!snapshot.hasData) {
+                                          return Center(
+                                            child: SizedBox(
+                                              width: 50,
+                                              height: 50,
+                                              child: CircularProgressIndicator(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryColor,
+                                              ),
+                                            ),
+                                          );
+                                        }
+                                        List<CartRecord> textCartRecordList =
+                                            snapshot.data;
+                                        return Text(
+                                          'R ${functions.getTotalAmount(textCartRecordList.toList()).toString()}',
+                                          style: FlutterFlowTheme.of(context)
+                                              .title1
+                                              .override(
+                                                fontFamily: 'inter sans serif',
+                                                color: Color(0xFFED1B6F),
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.bold,
+                                                useGoogleFonts: false,
+                                              ),
+                                        );
+                                      },
                                     ),
                                   ),
                                 ],

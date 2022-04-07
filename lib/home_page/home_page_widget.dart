@@ -6,6 +6,7 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../login/login_widget.dart';
 import '../main.dart';
 import '../product_details/product_details_widget.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -43,10 +44,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-              child: StreamBuilder<List<ProductsRecord>>(
-                stream: queryProductsRecord(
-                  singleRecord: true,
-                ),
+              child: StreamBuilder<List<CartRecord>>(
+                stream: queryCartRecord(),
                 builder: (context, snapshot) {
                   // Customize what your widget looks like when it's loading.
                   if (!snapshot.hasData) {
@@ -60,20 +59,16 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                     );
                   }
-                  List<ProductsRecord> badgeProductsRecordList = snapshot.data;
-                  // Return an empty Container when the document does not exist.
-                  if (snapshot.data.isEmpty) {
-                    return Container();
-                  }
-                  final badgeProductsRecord = badgeProductsRecordList.isNotEmpty
-                      ? badgeProductsRecordList.first
-                      : null;
+                  List<CartRecord> badgeCartRecordList = snapshot.data;
                   return Badge(
                     badgeContent: Text(
-                      '1',
+                      functions
+                          .addQuantities(badgeCartRecordList.toList())
+                          .toString(),
                       style: FlutterFlowTheme.of(context).bodyText1.override(
                             fontFamily: 'inter sans serif',
                             color: Colors.white,
+                            fontWeight: FontWeight.normal,
                             useGoogleFonts: false,
                           ),
                     ),
@@ -315,28 +310,6 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            6, 0, 0, 0),
-                                        child: Text(
-                                          valueOrDefault<String>(
-                                            gridViewProductsRecord.quantity
-                                                .toString(),
-                                            'quantity',
-                                          ),
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyText1
-                                              .override(
-                                                fontFamily: 'inter sans serif',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryText,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.normal,
-                                                useGoogleFonts: false,
-                                              ),
-                                        ),
-                                      ),
                                     ],
                                   ),
                                   Row(
@@ -365,18 +338,26 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                       InkWell(
                                         onTap: () async {
-                                          final cartCreateData =
-                                              createCartRecordData(
-                                            image: gridViewProductsRecord.image,
-                                            itemName: gridViewProductsRecord
-                                                .productName,
-                                            price: gridViewProductsRecord.price,
-                                            prtQuantity:
-                                                gridViewProductsRecord.quantity,
-                                          );
-                                          await CartRecord.collection
-                                              .doc()
-                                              .set(cartCreateData);
+                                          if ((gridViewProductsRecord
+                                                  .productName) !=
+                                              (gridViewProductsRecord
+                                                  .productName)) {
+                                            final cartCreateData =
+                                                createCartRecordData(
+                                              image:
+                                                  gridViewProductsRecord.image,
+                                              itemName: gridViewProductsRecord
+                                                  .productName,
+                                              price:
+                                                  gridViewProductsRecord.price,
+                                              prtQuantity:
+                                                  gridViewProductsRecord
+                                                      .quantity,
+                                            );
+                                            await CartRecord.collection
+                                                .doc()
+                                                .set(cartCreateData);
+                                          }
                                         },
                                         child: Icon(
                                           Icons.add_shopping_cart,
