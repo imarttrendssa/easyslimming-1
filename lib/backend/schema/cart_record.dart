@@ -20,8 +20,12 @@ abstract class CartRecord implements Built<CartRecord, CartRecordBuilder> {
   int get price;
 
   @nullable
-  @BuiltValueField(wireName: 'product_ID')
-  String get productID;
+  @BuiltValueField(wireName: 'prt_Quantity')
+  int get prtQuantity;
+
+  @nullable
+  @BuiltValueField(wireName: 'qty_sum')
+  int get qtySum;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -31,7 +35,8 @@ abstract class CartRecord implements Built<CartRecord, CartRecordBuilder> {
     ..image = ''
     ..itemName = ''
     ..price = 0
-    ..productID = '';
+    ..prtQuantity = 0
+    ..qtySum = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Cart');
@@ -57,7 +62,8 @@ Map<String, dynamic> createCartRecordData({
   String image,
   String itemName,
   int price,
-  String productID,
+  int prtQuantity,
+  int qtySum,
 }) =>
     serializers.toFirestore(
         CartRecord.serializer,
@@ -65,4 +71,5 @@ Map<String, dynamic> createCartRecordData({
           ..image = image
           ..itemName = itemName
           ..price = price
-          ..productID = productID));
+          ..prtQuantity = prtQuantity
+          ..qtySum = qtySum));

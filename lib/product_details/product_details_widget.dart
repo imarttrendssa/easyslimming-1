@@ -12,9 +12,11 @@ class ProductDetailsWidget extends StatefulWidget {
   const ProductDetailsWidget({
     Key key,
     this.productDetails,
+    this.productDetailsCart,
   }) : super(key: key);
 
   final DocumentReference productDetails;
+  final DocumentReference productDetailsCart;
 
   @override
   _ProductDetailsWidgetState createState() => _ProductDetailsWidgetState();
@@ -50,98 +52,88 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                InkWell(
+                  onTap: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            NavBarPage(initialPage: 'HomePage'),
+                      ),
+                    );
+                  },
+                  child: Image.asset(
+                    'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  ),
+                ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 200, 0),
-                  child: InkWell(
-                    onTap: () async {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              NavBarPage(initialPage: 'HomePage'),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+                  child: StreamBuilder<List<ProductsRecord>>(
+                    stream: queryProductsRecord(
+                      singleRecord: true,
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: CircularProgressIndicator(
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                            ),
+                          ),
+                        );
+                      }
+                      List<ProductsRecord> badgeProductsRecordList =
+                          snapshot.data;
+                      // Return an empty Container when the document does not exist.
+                      if (snapshot.data.isEmpty) {
+                        return Container();
+                      }
+                      final badgeProductsRecord =
+                          badgeProductsRecordList.isNotEmpty
+                              ? badgeProductsRecordList.first
+                              : null;
+                      return Badge(
+                        badgeContent: Text(
+                          '1',
+                          style:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Colors.white,
+                                    useGoogleFonts: false,
+                                  ),
+                        ),
+                        showBadge: true,
+                        shape: BadgeShape.circle,
+                        badgeColor: Color(0xFFED1B6F),
+                        elevation: 4,
+                        padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
+                        position: BadgePosition.topEnd(),
+                        animationType: BadgeAnimationType.scale,
+                        toAnimate: true,
+                        child: InkWell(
+                          onTap: () async {
+                            await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    NavBarPage(initialPage: 'cart'),
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            Icons.shopping_cart_outlined,
+                            color: Color(0xFFED1B6F),
+                            size: 30,
+                          ),
                         ),
                       );
                     },
-                    child: Image.asset(
-                      'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
-                      width: 60,
-                      height: 60,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-                  child: Badge(
-                    badgeContent: Text(
-                      '1',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'inter sans serif',
-                            color: Colors.white,
-                            useGoogleFonts: false,
-                          ),
-                    ),
-                    showBadge: true,
-                    shape: BadgeShape.circle,
-                    badgeColor: Color(0xFFED1B6F),
-                    elevation: 4,
-                    padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                    position: BadgePosition.topEnd(),
-                    animationType: BadgeAnimationType.scale,
-                    toAnimate: true,
-                    child: InkWell(
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'wishlist'),
-                          ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.favorite_border,
-                        color: Color(0xFFED1B6F),
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-                  child: Badge(
-                    badgeContent: Text(
-                      '1',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'inter sans serif',
-                            color: Colors.white,
-                            useGoogleFonts: false,
-                          ),
-                    ),
-                    showBadge: true,
-                    shape: BadgeShape.circle,
-                    badgeColor: Color(0xFFED1B6F),
-                    elevation: 4,
-                    padding: EdgeInsetsDirectional.fromSTEB(8, 0, 8, 0),
-                    position: BadgePosition.topEnd(),
-                    animationType: BadgeAnimationType.scale,
-                    toAnimate: true,
-                    child: InkWell(
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'cart'),
-                          ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Color(0xFFED1B6F),
-                        size: 30,
-                      ),
-                    ),
                   ),
                 ),
               ],
@@ -260,33 +252,12 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                             padding: EdgeInsetsDirectional.fromSTEB(0, 0, 5, 0),
                             child: InkWell(
                               onTap: () async {
-                                final wishlistCreateData =
-                                    createWishlistRecordData(
-                                  image: productDetailsProductsRecord.image,
-                                  itemName:
-                                      productDetailsProductsRecord.productName,
-                                  price: productDetailsProductsRecord.price,
-                                );
-                                await WishlistRecord.collection
-                                    .doc()
-                                    .set(wishlistCreateData);
-                              },
-                              child: Icon(
-                                Icons.favorite,
-                                color: Color(0xFFED1B6F),
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                            child: InkWell(
-                              onTap: () async {
                                 final cartCreateData = createCartRecordData(
                                   image: productDetailsProductsRecord.image,
                                   itemName:
                                       productDetailsProductsRecord.productName,
                                   price: productDetailsProductsRecord.price,
+                                  prtQuantity: 1,
                                 );
                                 await CartRecord.collection
                                     .doc()

@@ -26,8 +26,10 @@ abstract class ProductsRecord
   String get productDescription;
 
   @nullable
-  @BuiltValueField(wireName: 'Product_ID')
-  String get productID;
+  String get catecory;
+
+  @nullable
+  int get quantity;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
@@ -38,7 +40,8 @@ abstract class ProductsRecord
     ..productName = ''
     ..price = 0
     ..productDescription = ''
-    ..productID = '';
+    ..catecory = ''
+    ..quantity = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('products');
@@ -66,7 +69,8 @@ Map<String, dynamic> createProductsRecordData({
   String productName,
   int price,
   String productDescription,
-  String productID,
+  String catecory,
+  int quantity,
 }) =>
     serializers.toFirestore(
         ProductsRecord.serializer,
@@ -75,4 +79,5 @@ Map<String, dynamic> createProductsRecordData({
           ..productName = productName
           ..price = price
           ..productDescription = productDescription
-          ..productID = productID));
+          ..catecory = catecory
+          ..quantity = quantity));

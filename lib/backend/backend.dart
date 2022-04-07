@@ -7,7 +7,10 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/users_record.dart';
 import 'schema/products_record.dart';
 import 'schema/cart_record.dart';
-import 'schema/wishlist_record.dart';
+import 'schema/skin_care_record.dart';
+import 'schema/repair_oil_record.dart';
+import 'schema/beard_oil_record.dart';
+import 'schema/transactions_record.dart';
 import 'schema/serializers.dart';
 
 export 'package:cloud_firestore/cloud_firestore.dart';
@@ -17,7 +20,10 @@ export 'schema/serializers.dart';
 export 'schema/users_record.dart';
 export 'schema/products_record.dart';
 export 'schema/cart_record.dart';
-export 'schema/wishlist_record.dart';
+export 'schema/skin_care_record.dart';
+export 'schema/repair_oil_record.dart';
+export 'schema/beard_oil_record.dart';
+export 'schema/transactions_record.dart';
 
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Stream<List<UsersRecord>> queryUsersRecord(
@@ -64,19 +70,66 @@ Future<List<CartRecord>> queryCartRecordOnce(
     queryCollectionOnce(CartRecord.collection, CartRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-/// Functions to query WishlistRecords (as a Stream and as a Future).
-Stream<List<WishlistRecord>> queryWishlistRecord(
+/// Functions to query SkinCareRecords (as a Stream and as a Future).
+Stream<List<SkinCareRecord>> querySkinCareRecord(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollection(WishlistRecord.collection, WishlistRecord.serializer,
+    queryCollection(SkinCareRecord.collection, SkinCareRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
-Future<List<WishlistRecord>> queryWishlistRecordOnce(
+Future<List<SkinCareRecord>> querySkinCareRecordOnce(
         {Query Function(Query) queryBuilder,
         int limit = -1,
         bool singleRecord = false}) =>
-    queryCollectionOnce(WishlistRecord.collection, WishlistRecord.serializer,
+    queryCollectionOnce(SkinCareRecord.collection, SkinCareRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query RepairOilRecords (as a Stream and as a Future).
+Stream<List<RepairOilRecord>> queryRepairOilRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(RepairOilRecord.collection, RepairOilRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<RepairOilRecord>> queryRepairOilRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(RepairOilRecord.collection, RepairOilRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query BeardOilRecords (as a Stream and as a Future).
+Stream<List<BeardOilRecord>> queryBeardOilRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(BeardOilRecord.collection, BeardOilRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<BeardOilRecord>> queryBeardOilRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(BeardOilRecord.collection, BeardOilRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+/// Functions to query TransactionsRecords (as a Stream and as a Future).
+Stream<List<TransactionsRecord>> queryTransactionsRecord(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollection(
+        TransactionsRecord.collection, TransactionsRecord.serializer,
+        queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
+
+Future<List<TransactionsRecord>> queryTransactionsRecordOnce(
+        {Query Function(Query) queryBuilder,
+        int limit = -1,
+        bool singleRecord = false}) =>
+    queryCollectionOnce(
+        TransactionsRecord.collection, TransactionsRecord.serializer,
         queryBuilder: queryBuilder, limit: limit, singleRecord: singleRecord);
 
 Stream<List<T>> queryCollection<T>(

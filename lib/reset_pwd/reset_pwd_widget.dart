@@ -253,7 +253,7 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
                   options: FFButtonOptions(
                     width: double.infinity,
                     height: 50,
-                    color: FlutterFlowTheme.of(context).primaryColor,
+                    color: Color(0xFFED1B6F),
                     textStyle: FlutterFlowTheme.of(context).subtitle2.override(
                           fontFamily: 'inter sans serif',
                           color: Colors.white,
