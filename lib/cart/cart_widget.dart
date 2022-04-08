@@ -380,7 +380,7 @@ class _CartWidgetState extends State<CartWidget> {
                                     ),
                           ),
                           Text(
-                            'price',
+                            'Price',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'inter sans serif',
