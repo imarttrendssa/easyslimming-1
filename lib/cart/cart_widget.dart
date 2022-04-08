@@ -5,7 +5,6 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../payment_process/payment_process_widget.dart';
-import '../custom_code/actions/index.dart' as actions;
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -213,31 +212,21 @@ class _CartWidgetState extends State<CartWidget> {
                                             Padding(
                                               padding: EdgeInsetsDirectional
                                                   .fromSTEB(0, 20, 0, 0),
-                                              child: InkWell(
-                                                onTap: () async {
-                                                  await actions
-                                                      .countPriceandQty(
-                                                    listViewCartRecord
-                                                        .prtQuantity,
-                                                    listViewCartRecord.price,
-                                                  );
-                                                },
-                                                child: Text(
-                                                  'R ${listViewCartRecord.price.toString()}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .bodyText1
-                                                      .override(
-                                                        fontFamily:
-                                                            'inter sans serif',
-                                                        color:
-                                                            Color(0xFFED1B6F),
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        useGoogleFonts: false,
-                                                      ),
-                                                ),
+                                              child: Text(
+                                                'R ${functions.countPriceAndQty(listViewCartRecord.prtQuantity, listViewCartRecord.price).toString()}',
+                                                style:
+                                                    FlutterFlowTheme.of(context)
+                                                        .bodyText1
+                                                        .override(
+                                                          fontFamily:
+                                                              'inter sans serif',
+                                                          color:
+                                                              Color(0xFFED1B6F),
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                          useGoogleFonts: false,
+                                                        ),
                                               ),
                                             ),
                                           ],

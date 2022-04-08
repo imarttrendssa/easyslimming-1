@@ -13,8 +13,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'home_page/home_page_widget.dart';
 import 'products/products_widget.dart';
 import 'cart/cart_widget.dart';
-import 'profile/profile_widget.dart';
 import 'gallery/gallery_widget.dart';
+import 'profile/profile_widget.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -113,8 +113,8 @@ class _NavBarPageState extends State<NavBarPage> {
       'HomePage': HomePageWidget(),
       'products': ProductsWidget(),
       'cart': CartWidget(),
-      'profile': ProfileWidget(),
       'gallery': GalleryWidget(),
+      'profile': ProfileWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPage);
     return Scaffold(
@@ -155,6 +155,14 @@ class _NavBarPageState extends State<NavBarPage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(
+              Icons.image_outlined,
+              size: 30,
+            ),
+            label: 'Home',
+            tooltip: '',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
               Icons.person_outlined,
               size: 24,
             ),
@@ -163,14 +171,6 @@ class _NavBarPageState extends State<NavBarPage> {
               size: 24,
             ),
             label: 'Profile',
-            tooltip: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.image_outlined,
-              size: 30,
-            ),
-            label: 'Home',
             tooltip: '',
           )
         ],

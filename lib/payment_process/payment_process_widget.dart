@@ -6,7 +6,6 @@ import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class PaymentProcessWidget extends StatefulWidget {
@@ -584,10 +583,6 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
                                       ),
                                 ),
                               ),
-                            ),
-                            Html(
-                              data:
-                                  '<h3>H3 Header</h3> <p>Sample paragraph</p>',
                             ),
                             Padding(
                               padding:
