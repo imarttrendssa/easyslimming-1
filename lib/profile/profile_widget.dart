@@ -44,8 +44,8 @@ class _ProfileWidgetState extends State<ProfileWidget> {
               style: FlutterFlowTheme.of(context).title2.override(
                     fontFamily: 'inter sans serif',
                     color: Color(0xFFED1B6F),
-                    fontSize: 28,
-                    fontWeight: FontWeight.w500,
+                    fontSize: 40,
+                    fontWeight: FontWeight.w600,
                     useGoogleFonts: false,
                   ),
             ),

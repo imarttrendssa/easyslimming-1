@@ -43,7 +43,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 10, 15, 0),
               child: StreamBuilder<List<CartRecord>>(
                 stream: queryCartRecord(),
                 builder: (context, snapshot) {
@@ -336,34 +336,52 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                               ),
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () async {
-                                          if ((gridViewProductsRecord
-                                                  .productName) !=
-                                              (gridViewProductsRecord
-                                                  .productName)) {
-                                            final cartCreateData =
-                                                createCartRecordData(
-                                              image:
-                                                  gridViewProductsRecord.image,
-                                              itemName: gridViewProductsRecord
-                                                  .productName,
-                                              price:
-                                                  gridViewProductsRecord.price,
-                                              prtQuantity:
-                                                  gridViewProductsRecord
-                                                      .quantity,
+                                      StreamBuilder<List<CartRecord>>(
+                                        stream: queryCartRecord(),
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return Center(
+                                              child: SizedBox(
+                                                width: 50,
+                                                height: 50,
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .primaryColor,
+                                                ),
+                                              ),
                                             );
-                                            await CartRecord.collection
-                                                .doc()
-                                                .set(cartCreateData);
                                           }
+                                          List<CartRecord>
+                                              gridAddToCartIconCartRecordList =
+                                              snapshot.data;
+                                          return InkWell(
+                                            onTap: () async {
+                                              final cartCreateData =
+                                                  createCartRecordData(
+                                                image: gridViewProductsRecord
+                                                    .image,
+                                                itemName: gridViewProductsRecord
+                                                    .productName,
+                                                price: gridViewProductsRecord
+                                                    .price,
+                                                prtQuantity:
+                                                    gridViewProductsRecord
+                                                        .quantity,
+                                              );
+                                              await CartRecord.collection
+                                                  .doc()
+                                                  .set(cartCreateData);
+                                            },
+                                            child: Icon(
+                                              Icons.add_shopping_cart,
+                                              color: Color(0xFFED1B6F),
+                                              size: 24,
+                                            ),
+                                          );
                                         },
-                                        child: Icon(
-                                          Icons.add_shopping_cart,
-                                          color: Color(0xFFED1B6F),
-                                          size: 24,
-                                        ),
                                       ),
                                     ],
                                   ),

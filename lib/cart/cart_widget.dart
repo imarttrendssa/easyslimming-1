@@ -51,61 +51,64 @@ class _CartWidgetState extends State<CartWidget> {
                   fit: BoxFit.cover,
                 ),
               ),
-              StreamBuilder<List<CartRecord>>(
-                stream: queryCartRecord(),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator(
-                          color: FlutterFlowTheme.of(context).primaryColor,
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0, 10, 0, 0),
+                child: StreamBuilder<List<CartRecord>>(
+                  stream: queryCartRecord(),
+                  builder: (context, snapshot) {
+                    // Customize what your widget looks like when it's loading.
+                    if (!snapshot.hasData) {
+                      return Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CircularProgressIndicator(
+                            color: FlutterFlowTheme.of(context).primaryColor,
+                          ),
+                        ),
+                      );
+                    }
+                    List<CartRecord> badgeCartRecordList = snapshot.data;
+                    return Badge(
+                      badgeContent: Text(
+                        functions
+                            .addQuantities(badgeCartRecordList.toList())
+                            .toString(),
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'inter sans serif',
+                              color: Colors.white,
+                              fontSize: 14,
+                              fontWeight: FontWeight.normal,
+                              useGoogleFonts: false,
+                            ),
+                      ),
+                      showBadge: true,
+                      shape: BadgeShape.circle,
+                      badgeColor: Color(0xFFED1B6F),
+                      elevation: 4,
+                      padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
+                      position: BadgePosition.topEnd(),
+                      animationType: BadgeAnimationType.scale,
+                      toAnimate: true,
+                      child: InkWell(
+                        onTap: () async {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  NavBarPage(initialPage: 'cart'),
+                            ),
+                          );
+                        },
+                        child: Icon(
+                          Icons.shopping_cart_outlined,
+                          color: Color(0xFFED1B6F),
+                          size: 30,
                         ),
                       ),
                     );
-                  }
-                  List<CartRecord> badgeCartRecordList = snapshot.data;
-                  return Badge(
-                    badgeContent: Text(
-                      functions
-                          .addQuantities(badgeCartRecordList.toList())
-                          .toString(),
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'inter sans serif',
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            useGoogleFonts: false,
-                          ),
-                    ),
-                    showBadge: true,
-                    shape: BadgeShape.circle,
-                    badgeColor: Color(0xFFED1B6F),
-                    elevation: 4,
-                    padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                    position: BadgePosition.topEnd(),
-                    animationType: BadgeAnimationType.scale,
-                    toAnimate: true,
-                    child: InkWell(
-                      onTap: () async {
-                        await Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                NavBarPage(initialPage: 'cart'),
-                          ),
-                        );
-                      },
-                      child: Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Color(0xFFED1B6F),
-                        size: 30,
-                      ),
-                    ),
-                  );
-                },
+                  },
+                ),
               ),
             ],
           ),
@@ -220,7 +223,7 @@ class _CartWidgetState extends State<CartWidget> {
                                                   );
                                                 },
                                                 child: Text(
-                                                  'R ${functions.countPriceAndQty(listViewCartRecord.prtQuantity, listViewCartRecord.price).toString()}',
+                                                  'R ${listViewCartRecord.price.toString()}',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyText1

@@ -57,7 +57,7 @@ class _ListAllProductsWidgetState extends State<ListAllProductsWidget> {
               size: 24,
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
+              padding: EdgeInsetsDirectional.fromSTEB(0, 10, 15, 0),
               child: StreamBuilder<List<CartRecord>>(
                 stream: queryCartRecord(),
                 builder: (context, snapshot) {
