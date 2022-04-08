@@ -3,6 +3,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../main.dart';
+import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -70,11 +71,9 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0, 0, 15, 0),
-                  child: StreamBuilder<List<ProductsRecord>>(
-                    stream: queryProductsRecord(
-                      singleRecord: true,
-                    ),
+                  padding: EdgeInsetsDirectional.fromSTEB(0, 10, 15, 0),
+                  child: StreamBuilder<List<CartRecord>>(
+                    stream: queryCartRecord(),
                     builder: (context, snapshot) {
                       // Customize what your widget looks like when it's loading.
                       if (!snapshot.hasData) {
@@ -88,23 +87,17 @@ class _ProductDetailsWidgetState extends State<ProductDetailsWidget> {
                           ),
                         );
                       }
-                      List<ProductsRecord> badgeProductsRecordList =
-                          snapshot.data;
-                      // Return an empty Container when the document does not exist.
-                      if (snapshot.data.isEmpty) {
-                        return Container();
-                      }
-                      final badgeProductsRecord =
-                          badgeProductsRecordList.isNotEmpty
-                              ? badgeProductsRecordList.first
-                              : null;
+                      List<CartRecord> badgeCartRecordList = snapshot.data;
                       return Badge(
                         badgeContent: Text(
-                          '1',
+                          functions
+                              .addQuantities(badgeCartRecordList.toList())
+                              .toString(),
                           style:
                               FlutterFlowTheme.of(context).bodyText1.override(
                                     fontFamily: 'inter sans serif',
                                     color: Colors.white,
+                                    fontWeight: FontWeight.normal,
                                     useGoogleFonts: false,
                                   ),
                         ),

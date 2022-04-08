@@ -9,18 +9,30 @@ import '../backend/backend.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../auth/auth_util.dart';
 
-int countPriceAndQty(
+double countPriceAndQty(
   int qty,
-  int prc,
+  double prc,
 ) {
   return qty * prc;
 }
 
-int getTotalAmount(List<CartRecord> prices) {
-  // calculate sum of prices in documents
+double getTotalAmount(List<CartRecord> prices) {
+  // calculate sum of prices in firebase  documents
   int sum = 0;
+
   for (int i = 0; i < prices.length; i++) {
     sum += (prices[i].price * prices[i].prtQuantity);
   }
+
+  return sum;
+}
+
+int addQuantities(List<CartRecord> qty) {
+  int sum = 0;
+
+  for (int i = 0; i < qty.length; i++) {
+    sum += qty[i].prtQuantity;
+  }
+
   return sum;
 }
