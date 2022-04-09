@@ -2,6 +2,7 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
+import '../flutter_flow/flutter_flow_web_view.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
@@ -562,61 +563,11 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
                             ),
                           ],
                         ),
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Align(
-                              alignment: AlignmentDirectional(0, 0),
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    20, 0, 50, 10),
-                                child: Text(
-                                  'Choose Payment plan',
-                                  style: FlutterFlowTheme.of(context)
-                                      .title1
-                                      .override(
-                                        fontFamily: 'inter sans serif',
-                                        color: Color(0xFFED1B6F),
-                                        fontSize: 30,
-                                        useGoogleFonts: false,
-                                      ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding:
-                                  EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
-                              child: FFButtonWidget(
-                                onPressed: () async {
-                                  await pageViewController.nextPage(
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.ease,
-                                  );
-                                },
-                                text: 'Continue to Payment ',
-                                options: FFButtonOptions(
-                                  width: double.infinity,
-                                  height: 50,
-                                  color: Color(0xFFED1B6F),
-                                  textStyle: FlutterFlowTheme.of(context)
-                                      .subtitle2
-                                      .override(
-                                        fontFamily: 'inter sans serif',
-                                        color: Colors.white,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.normal,
-                                        useGoogleFonts: false,
-                                      ),
-                                  borderSide: BorderSide(
-                                    color: Colors.transparent,
-                                    width: 1,
-                                  ),
-                                  borderRadius: 12,
-                                ),
-                              ),
-                            ),
-                          ],
+                        FlutterFlowWebView(
+                          url: 'https://flutter.dev',
+                          bypass: false,
+                          verticalScroll: false,
+                          horizontalScroll: false,
                         ),
                         Column(
                           mainAxisSize: MainAxisSize.max,
