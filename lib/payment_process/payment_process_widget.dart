@@ -2,12 +2,14 @@ import '../backend/backend.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
-import '../flutter_flow/flutter_flow_web_view.dart';
+import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 class PaymentProcessWidget extends StatefulWidget {
   const PaymentProcessWidget({Key key}) : super(key: key);
@@ -29,6 +31,8 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
   TextEditingController phoneController;
   TextEditingController emailController;
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  WebViewPlusController _controller;
+  double _height = 1;
 
   @override
   void initState() {
@@ -563,11 +567,33 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
                             ),
                           ],
                         ),
-                        FlutterFlowWebView(
-                          url: 'https://flutter.dev',
-                          bypass: false,
-                          verticalScroll: false,
-                          horizontalScroll: false,
+                        ListView(
+                          children: [
+                            Text("Height of WebviewPlus: $_height",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold)),
+                            SizedBox(
+                              height: _height,
+                              child: WebViewPlus(
+                                javascriptChannels: null,
+                                initialUrl: 'assets/button.html',
+                                onWebViewCreated: (controller) {
+                                  _controller = controller;
+                                },
+                                onPageFinished: (url) {
+                                  _controller
+                                      ?.getHeight()
+                                      .then((double height) {
+                                    debugPrint("Height: " + height.toString());
+                                    setState(() {
+                                      _height = height;
+                                    });
+                                  });
+                                },
+                                javascriptMode: JavascriptMode.unrestricted,
+                              ),
+                            )
+                          ],
                         ),
                         Column(
                           mainAxisSize: MainAxisSize.max,
@@ -680,5 +706,13 @@ class _PaymentProcessWidgetState extends State<PaymentProcessWidget> {
         ),
       ),
     );
+  }
+
+  _loadHtmlFromAssets() async {
+    String fileHtmlContents =
+        await rootBundle.loadString('assets/html_button/button.html');
+    _controller.loadUrl(Uri.dataFromString(fileHtmlContents,
+            mimeType: 'txt/html', encoding: Encoding.getByName('utf-8'))
+        .toString());
   }
 }

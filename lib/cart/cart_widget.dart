@@ -4,7 +4,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../payment_process/payment_process_widget.dart';
+import '../checkout/checkout_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -398,7 +398,7 @@ class _CartWidgetState extends State<CartWidget> {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PaymentProcessWidget(),
+                          builder: (context) => CheckoutWidget(),
                         ),
                       );
                     },
