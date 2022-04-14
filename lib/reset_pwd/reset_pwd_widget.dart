@@ -112,7 +112,12 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
                         obscureText: !currPwdVisibility,
                         decoration: InputDecoration(
                           labelText: 'current password *',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Colors.black,
+                                    useGoogleFonts: false,
+                                  ),
                           hintStyle: FlutterFlowTheme.of(context).bodyText1,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -157,7 +162,12 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
                         obscureText: !newPwdVisibility,
                         decoration: InputDecoration(
                           labelText: 'new password *',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Colors.black,
+                                    useGoogleFonts: false,
+                                  ),
                           hintStyle: FlutterFlowTheme.of(context).bodyText1,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -202,7 +212,12 @@ class _ResetPwdWidgetState extends State<ResetPwdWidget> {
                         obscureText: !confPwdVisibility,
                         decoration: InputDecoration(
                           labelText: 'confirm password *',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Colors.black,
+                                    useGoogleFonts: false,
+                                  ),
                           hintStyle: FlutterFlowTheme.of(context).bodyText1,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(

@@ -108,7 +108,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Username Or Email',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).bodyText1.override(
+                                  fontFamily: 'inter sans serif',
+                                  color: Colors.black,
+                                  useGoogleFonts: false,
+                                ),
                         hintStyle: FlutterFlowTheme.of(context).bodyText1,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -141,7 +146,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                       obscureText: !loginPwdVisibility,
                       decoration: InputDecoration(
                         labelText: 'Password',
-                        labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                        labelStyle:
+                            FlutterFlowTheme.of(context).bodyText1.override(
+                                  fontFamily: 'inter sans serif',
+                                  color: Colors.black,
+                                  useGoogleFonts: false,
+                                ),
                         hintStyle: FlutterFlowTheme.of(context).bodyText1,
                         enabledBorder: OutlineInputBorder(
                           borderSide: BorderSide(
