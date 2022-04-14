@@ -95,7 +95,7 @@ flutter:
     - assets/pdfs/
     - assets/button.html
     - assets/script.js
-    - assets/style.css
+    
   fonts:
     - family: inter sans serif
       fonts:
