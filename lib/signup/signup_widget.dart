@@ -47,7 +47,7 @@ class _SignupWidgetState extends State<SignupWidget> {
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0, 0, 200, 0),
               child: Image.asset(
-                'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
+                'assets/images/easyslim.png',
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,

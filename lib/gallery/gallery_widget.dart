@@ -38,7 +38,7 @@ class _GalleryWidgetState extends State<GalleryWidget> {
                 );
               },
               child: Image.asset(
-                'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
+                'assets/images/easyslim.png',
                 width: 60,
                 height: 60,
                 fit: BoxFit.cover,

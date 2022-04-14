@@ -4,7 +4,7 @@ import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../payment_process/payment_process_widget.dart';
+import '../checkout/checkout_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -44,7 +44,7 @@ class _CartWidgetState extends State<CartWidget> {
                   );
                 },
                 child: Image.asset(
-                  'assets/images/cropped-104336826_140397510962671_14613263856390329-1-32x32-2-large.png',
+                  'assets/images/easyslim.png',
                   width: 60,
                   height: 60,
                   fit: BoxFit.cover,
@@ -245,14 +245,23 @@ class _CartWidgetState extends State<CartWidget> {
                                                     .fromSTEB(0, 0, 0, 10),
                                                 child: InkWell(
                                                   onTap: () async {
-                                                    final cartUpdateData = {
-                                                      'prt_Quantity':
-                                                          FieldValue.increment(
-                                                              -1),
-                                                    };
-                                                    await listViewCartRecord
-                                                        .reference
-                                                        .update(cartUpdateData);
+                                                    if ((listViewCartRecord
+                                                            .prtQuantity) <
+                                                        2) {
+                                                      await listViewCartRecord
+                                                          .reference
+                                                          .delete();
+                                                    } else {
+                                                      final cartUpdateData = {
+                                                        'prt_Quantity':
+                                                            FieldValue
+                                                                .increment(-1),
+                                                      };
+                                                      await listViewCartRecord
+                                                          .reference
+                                                          .update(
+                                                              cartUpdateData);
+                                                    }
                                                   },
                                                   child: Icon(
                                                     Icons.minimize,
@@ -389,7 +398,7 @@ class _CartWidgetState extends State<CartWidget> {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PaymentProcessWidget(),
+                          builder: (context) => CheckoutWidget(),
                         ),
                       );
                     },
