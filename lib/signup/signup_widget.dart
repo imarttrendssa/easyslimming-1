@@ -114,7 +114,12 @@ class _SignupWidgetState extends State<SignupWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: 'name',
-                            labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                            labelStyle:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'inter sans serif',
+                                      color: Colors.black,
+                                      useGoogleFonts: false,
+                                    ),
                             hintStyle: FlutterFlowTheme.of(context).bodyText1,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -148,7 +153,12 @@ class _SignupWidgetState extends State<SignupWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: ' Email/Phone',
-                            labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                            labelStyle:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'inter sans serif',
+                                      color: Colors.black,
+                                      useGoogleFonts: false,
+                                    ),
                             hintStyle: FlutterFlowTheme.of(context).bodyText1,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -182,7 +192,12 @@ class _SignupWidgetState extends State<SignupWidget> {
                           obscureText: !signupPwdVisibility,
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                            labelStyle:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'inter sans serif',
+                                      color: Colors.black,
+                                      useGoogleFonts: false,
+                                    ),
                             hintStyle: FlutterFlowTheme.of(context).bodyText1,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(

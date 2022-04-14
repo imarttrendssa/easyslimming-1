@@ -6,7 +6,6 @@ import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:webview_flutter_plus/webview_flutter_plus.dart';
 
 class CheckoutWidget extends StatefulWidget {
   const CheckoutWidget({Key key}) : super(key: key);
@@ -17,8 +16,6 @@ class CheckoutWidget extends StatefulWidget {
 
 class _CheckoutWidgetState extends State<CheckoutWidget> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  WebViewPlusController _controller;
-  double _height = 1355.0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +28,7 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
                 onTap: () async {
@@ -47,6 +44,21 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
                   width: 60,
                   height: 60,
                   fit: BoxFit.cover,
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional(-1, 0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 30, 10),
+                  child: Text(
+                    'Checkout',
+                    style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily: 'inter sans serif',
+                          color: Color(0xFFED1B6F),
+                          fontSize: 40,
+                          useGoogleFonts: false,
+                        ),
+                  ),
                 ),
               ),
               Padding(
@@ -116,54 +128,6 @@ class _CheckoutWidgetState extends State<CheckoutWidget> {
         elevation: 0,
       ),
       backgroundColor: Color(0xFFE5E5E5),
-      body: SafeArea(
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Padding(
-              padding: const EdgeInsets.all(10),
-              child: WebViewPlus(
-                javascriptMode: JavascriptMode.unrestricted,
-                onWebViewCreated: (controller) {
-                  controller.loadUrl('assets/button.html');
-                },
-              )
-
-              /*ListView(
-              children: [
-                Text(
-                  "Payfast Payments: $_height",
-                  style: FlutterFlowTheme.of(context).bodyText1.override(
-                        fontFamily: 'inter sans serif',
-                        color: Colors.black,
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                        useGoogleFonts: false,
-                      ),
-                ),
-                SizedBox(
-                  height: _height,
-                  child: WebViewPlus(
-                    javascriptChannels: null,
-                    initialUrl: 'assets/button.html',
-                    onWebViewCreated: (controller) {
-                      _controller = controller;
-                    },
-                    onPageFinished: (url) {
-                      _controller?.getHeight().then((double height) {
-                        debugPrint("Height: " + height.toString());
-                        setState(() {
-                          _height = height;
-                        });
-                      });
-                    },
-                    javascriptMode: JavascriptMode.unrestricted,
-                  ),
-                )
-              ],
-            ),*/
-              ),
-        ),
-      ),
     );
   }
 }

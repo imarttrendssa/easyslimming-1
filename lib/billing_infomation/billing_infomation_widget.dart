@@ -1,4 +1,5 @@
 import '../backend/backend.dart';
+import '../checkout/checkout_widget.dart';
 import '../flutter_flow/flutter_flow_drop_down.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
@@ -55,7 +56,7 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
           padding: EdgeInsetsDirectional.fromSTEB(0, 5, 0, 0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               InkWell(
                 onTap: () async {
@@ -71,6 +72,21 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                   width: 60,
                   height: 60,
                   fit: BoxFit.cover,
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional(-1, 0),
+                child: Padding(
+                  padding: EdgeInsetsDirectional.fromSTEB(20, 0, 30, 10),
+                  child: Text(
+                    'Checkout',
+                    style: FlutterFlowTheme.of(context).title1.override(
+                          fontFamily: 'inter sans serif',
+                          color: Color(0xFFED1B6F),
+                          fontSize: 40,
+                          useGoogleFonts: false,
+                        ),
+                  ),
                 ),
               ),
               Padding(
@@ -160,7 +176,12 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                           obscureText: false,
                           decoration: InputDecoration(
                             labelText: 'First name',
-                            labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                            labelStyle:
+                                FlutterFlowTheme.of(context).bodyText1.override(
+                                      fontFamily: 'inter sans serif',
+                                      color: Colors.black,
+                                      useGoogleFonts: false,
+                                    ),
                             hintStyle: FlutterFlowTheme.of(context).bodyText1,
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(
@@ -194,7 +215,11 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: 'Last name',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    useGoogleFonts: false,
+                                  ),
                           hintStyle: FlutterFlowTheme.of(context).bodyText1,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(
@@ -230,7 +255,10 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Company name',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                    labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'inter sans serif',
+                          useGoogleFonts: false,
+                        ),
                     hintStyle: FlutterFlowTheme.of(context).bodyText1,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -287,7 +315,11 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Street Address',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                    labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'inter sans serif',
+                          color: Colors.black,
+                          useGoogleFonts: false,
+                        ),
                     hintStyle: FlutterFlowTheme.of(context).bodyText1,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -320,7 +352,11 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Town / City',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                    labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'inter sans serif',
+                          color: Colors.black,
+                          useGoogleFonts: false,
+                        ),
                     hintStyle: FlutterFlowTheme.of(context).bodyText1,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -353,7 +389,11 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Province',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                    labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'inter sans serif',
+                          color: Colors.black,
+                          useGoogleFonts: false,
+                        ),
                     hintStyle: FlutterFlowTheme.of(context).bodyText1,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -386,7 +426,11 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Postcode / Zip',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                    labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'inter sans serif',
+                          color: Colors.black,
+                          useGoogleFonts: false,
+                        ),
                     hintStyle: FlutterFlowTheme.of(context).bodyText1,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -419,7 +463,11 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: 'Phone',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                    labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'inter sans serif',
+                          color: Colors.black,
+                          useGoogleFonts: false,
+                        ),
                     hintStyle: FlutterFlowTheme.of(context).bodyText1,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -452,7 +500,11 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
                   obscureText: false,
                   decoration: InputDecoration(
                     labelText: ' Email',
-                    labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                    labelStyle: FlutterFlowTheme.of(context).bodyText1.override(
+                          fontFamily: 'inter sans serif',
+                          color: Colors.black,
+                          useGoogleFonts: false,
+                        ),
                     hintStyle: FlutterFlowTheme.of(context).bodyText1,
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -481,8 +533,13 @@ class _BillingInfomationWidgetState extends State<BillingInfomationWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(20, 10, 20, 0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CheckoutWidget(),
+                      ),
+                    );
                   },
                   text: 'Proceed',
                   options: FFButtonOptions(

@@ -1,10 +1,10 @@
 import '../auth/auth_util.dart';
 import '../backend/backend.dart';
+import '../billing_infomation/billing_infomation_widget.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import '../main.dart';
-import '../checkout/checkout_widget.dart';
 import '../flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -374,9 +374,10 @@ class _CartWidgetState extends State<CartWidget> {
                               ),
                             );
                           }
-                          List<CartRecord> textCartRecordList = snapshot.data;
+                          List<CartRecord> totalPriceCartRecordList =
+                              snapshot.data;
                           return Text(
-                            'R ${functions.getTotalAmount(textCartRecordList.toList()).toString()}',
+                            'R ${functions.getTotalAmount(totalPriceCartRecordList.toList()).toString()}',
                             style:
                                 FlutterFlowTheme.of(context).bodyText1.override(
                                       fontFamily: 'inter sans serif',
@@ -398,7 +399,7 @@ class _CartWidgetState extends State<CartWidget> {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CheckoutWidget(),
+                          builder: (context) => BillingInfomationWidget(),
                         ),
                       );
                     },

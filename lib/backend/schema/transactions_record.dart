@@ -12,35 +12,44 @@ abstract class TransactionsRecord
       _$transactionsRecordSerializer;
 
   @nullable
-  @BuiltValueField(wireName: 'prt_Img')
-  String get prtImg;
-
-  @nullable
   @BuiltValueField(wireName: 'prt_name')
   String get prtName;
-
-  @nullable
-  @BuiltValueField(wireName: 'prt_price')
-  int get prtPrice;
 
   @nullable
   @BuiltValueField(wireName: 'prt_qty')
   int get prtQty;
 
   @nullable
-  @BuiltValueField(wireName: 'prts_total')
-  int get prtsTotal;
+  @BuiltValueField(wireName: 'prt_price')
+  double get prtPrice;
+
+  @nullable
+  @BuiltValueField(wireName: 'prt_image')
+  String get prtImage;
+
+  @nullable
+  @BuiltValueField(wireName: 'prt_total')
+  double get prtTotal;
+
+  @nullable
+  @BuiltValueField(wireName: 'order_id')
+  int get orderId;
+
+  @nullable
+  @BuiltValueField(wireName: 'transaction_user')
+  DocumentReference get transactionUser;
 
   @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
   static void _initializeBuilder(TransactionsRecordBuilder builder) => builder
-    ..prtImg = ''
     ..prtName = ''
-    ..prtPrice = 0
     ..prtQty = 0
-    ..prtsTotal = 0;
+    ..prtPrice = 0.0
+    ..prtImage = ''
+    ..prtTotal = 0.0
+    ..orderId = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Transactions');
@@ -65,17 +74,21 @@ abstract class TransactionsRecord
 }
 
 Map<String, dynamic> createTransactionsRecordData({
-  String prtImg,
   String prtName,
-  int prtPrice,
   int prtQty,
-  int prtsTotal,
+  double prtPrice,
+  String prtImage,
+  double prtTotal,
+  int orderId,
+  DocumentReference transactionUser,
 }) =>
     serializers.toFirestore(
         TransactionsRecord.serializer,
         TransactionsRecord((t) => t
-          ..prtImg = prtImg
           ..prtName = prtName
-          ..prtPrice = prtPrice
           ..prtQty = prtQty
-          ..prtsTotal = prtsTotal));
+          ..prtPrice = prtPrice
+          ..prtImage = prtImage
+          ..prtTotal = prtTotal
+          ..orderId = orderId
+          ..transactionUser = transactionUser));
