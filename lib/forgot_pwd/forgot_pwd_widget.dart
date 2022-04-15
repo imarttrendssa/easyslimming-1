@@ -103,7 +103,12 @@ class _ForgotPwdWidgetState extends State<ForgotPwdWidget> {
                         obscureText: false,
                         decoration: InputDecoration(
                           labelText: 'Email',
-                          labelStyle: FlutterFlowTheme.of(context).bodyText1,
+                          labelStyle:
+                              FlutterFlowTheme.of(context).bodyText1.override(
+                                    fontFamily: 'inter sans serif',
+                                    color: Colors.black,
+                                    useGoogleFonts: false,
+                                  ),
                           hintStyle: FlutterFlowTheme.of(context).bodyText1,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(

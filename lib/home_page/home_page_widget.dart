@@ -346,6 +346,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                             price: gridViewProductsRecord.price,
                                             prtQuantity:
                                                 gridViewProductsRecord.quantity,
+                                            userID: currentUserUid,
                                           );
                                           await CartRecord.collection
                                               .doc()
@@ -564,6 +565,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                           listViewProductsRecord
                                                               .price,
                                                       prtQuantity: 1,
+                                                      userID: currentUserUid,
                                                     );
                                                     await CartRecord.collection
                                                         .doc()
