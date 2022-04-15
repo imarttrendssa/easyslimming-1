@@ -28,6 +28,9 @@ abstract class CartRecord implements Built<CartRecord, CartRecordBuilder> {
   DocumentReference get cartUser;
 
   @nullable
+  String get userID;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -35,7 +38,8 @@ abstract class CartRecord implements Built<CartRecord, CartRecordBuilder> {
     ..image = ''
     ..itemName = ''
     ..prtQuantity = 0
-    ..price = 0.0;
+    ..price = 0.0
+    ..userID = '';
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('Cart');
@@ -63,6 +67,7 @@ Map<String, dynamic> createCartRecordData({
   int prtQuantity,
   double price,
   DocumentReference cartUser,
+  String userID,
 }) =>
     serializers.toFirestore(
         CartRecord.serializer,
@@ -71,4 +76,5 @@ Map<String, dynamic> createCartRecordData({
           ..itemName = itemName
           ..prtQuantity = prtQuantity
           ..price = price
-          ..cartUser = cartUser));
+          ..cartUser = cartUser
+          ..userID = userID));
